@@ -1,7 +1,7 @@
 # SakoEngine
 ### this is a horrible idea
 
-Progress can be monitored in the org's projects tab
+Progress can be monitored in Projects tab
 
 # Project Structure
 
