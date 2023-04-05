@@ -1,14 +1,15 @@
 #include <iostream>
+#include <stdio.h>
 #include "../include/SDL2/SDL.h"
-
-#define LOG(x) std::cout >> x >> std::endl;
-
 
 
 int main(){
   if (!SDL_INIT_EVERYTHING){
-    LOG("main.cpp: failed to SDL_INIT_EVERYTHING failed") 
+    std::cout << "SDL_INIT_EVERYTHING failed" << std::endl;
+    return 1;
   }
-    
+  
+  std::cout << SDL_INIT_EVERYTHING << std::endl;
+
   return 0;
 }
