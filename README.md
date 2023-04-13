@@ -11,5 +11,4 @@ Progress can be monitored in Projects tab
 ## Physicks
     Special Physics engine (hopefully)
 ## GPG KEY
-holdon ill do that lkater
-testing it rn
+    https://github.com/Sakooooo/gpg-keys/blob/master/sako_public.asc
