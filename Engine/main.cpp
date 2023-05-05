@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdio.h>
-#include "../include/SDL2/SDL.h"
-
+#include "../lib/SDL/include/SDL3/SDL.h"
 
 int main(){
   if (!SDL_INIT_EVERYTHING){

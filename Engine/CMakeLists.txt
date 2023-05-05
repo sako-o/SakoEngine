@@ -33,6 +33,6 @@ else()
 endif()
 
 add_executable(${PROJECT_NAME}
-    main.cpp
+    src/main.cpp
 
 )
