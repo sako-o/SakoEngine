@@ -1,5 +1,6 @@
 # for this repo
 build/
+build/*
 
 # CMake files
 CMakeLists.txt.user
@@ -48,3 +49,5 @@ _deps
 *.out
 *.app
 
+# clangd files
+.cache/

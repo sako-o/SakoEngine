@@ -4,6 +4,10 @@ project(SakoEngine VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
 
+# for neovim/vim clangd language server
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
+
 message(NOTICE "
 
 
