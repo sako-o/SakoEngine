@@ -1,7 +1,27 @@
 add_subdirectory(SDL)
-
+add_subdirectory(SDL_IMAGE)
 # SDL3 Options 
-set(BUILD_SHARED_LIBS OFF)
+set(SDL_TEST OFF)
+set(BUILD_SHARED_LIBS ON)
+
+# SDL_IMAGE options
+set(SDL3IMAGE_AVIF OFF)
+set(SDL3IMAGE_BMP ON)
+set(SDL3IMAGE_GIF ON)
+set(SDL3IMAGE_JPG OFF)
+set(SDL3IMAGE_JXL OFF)
+set(SDL3IMAGE_LBM OFF)
+set(SDL3IMAGE_PCX OFF)
+set(SDL3IMAGE_PNG ON)
+set(SDL3IMAGE_PNM OFF)
+set(SDL3IMAGE_QOI OFF)
+set(SDL3IMAGE_SVG OFF)
+set(SDL3IMAGE_TGA OFF)
+set(SDL3IMAGE_TIF OFF)
+set(SDL3IMAGE_WEBP OFF)
+set(SDL3IMAGE_XCF OFF)
+set(SDL3IMAGE_XPM OFF)
 
 add_library(vendor INTERFACE)
-target_link_libraries(vendor INTERFACE SDL3::SDL3)
+target_link_libraries(vendor INTERFACE SDL3::SDL3 SDL3_image::SDL3_image)
+

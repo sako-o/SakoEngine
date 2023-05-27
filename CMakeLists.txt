@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(SakoEngine VERSION 0.0.1)
 
+# cause we need the dll and stuff :D
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
 
@@ -9,8 +12,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 
 message(NOTICE "
-
-
     >>>>>>>>>>> >>>>>>>>>>>>>>>>>
     >>>>>>>>>>  >>>>>>>>>>>>>>>>>
     >>>>>>>>>>  >>>>>>>>>>>>>>>>>
@@ -19,12 +20,7 @@ message(NOTICE "
     >                       >
       >>>>>>>>>>>>>>>>>>>>> 
 
-          SakoEngine
-
-
-
-
-")
+          SakoEngine              ")
 
 message(NOTICE "Building Version " ${PROJECT_VERSION})
 
