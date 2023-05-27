@@ -1,6 +1,7 @@
 #include "SDL_error.h"
 #include "SDL_init.h"
 #include "SDL_log.h"
+#include "SDL_timer.h"
 #include "SDL_video.h"
 #include <SDL.h>
 #include <SDL_image.h>
@@ -26,6 +27,12 @@ int main(int argc, char *argv[]) {
     SDL_Log("%s", "how did you fail to make the window??", SDL_GetError());
     return 1;
   }
+
+  SDL_Delay(3000);
+
+  SDL_DestroyWindow(window);
+
+  SDL_Quit();
 
   return 0;
 }
