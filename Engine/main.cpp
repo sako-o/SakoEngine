@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
   // pauses execution in miliseconds
   //  SDL_Delay(3000);
 
+  void PrintKeyInfo(SDL_KeyboardEvent * key);
+
   // tells SDL2 that the game
   while (isRunning) {
     // TODO(sako) think of a better name for this
@@ -38,8 +40,12 @@ int main(int argc, char *argv[]) {
     while (SDL_PollEvent(&event))
       switch (event.type) {
       default:
-        printf("SDL2 is waiting for events\n");
+        break;
+      case SDL_EVENT_KEY_DOWN:
+      case SDL_EVENT_KEY_UP:
+        PrintKeyInfo(&event.key);
       case SDL_EVENT_QUIT:
+        isRunning = false;
         break;
       }
   }
