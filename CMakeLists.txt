@@ -10,18 +10,6 @@ set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
 # for neovim/vim clangd language server
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-
-message(NOTICE "
-    >>>>>>>>>>> >>>>>>>>>>>>>>>>>
-    >>>>>>>>>>  >>>>>>>>>>>>>>>>>
-    >>>>>>>>>>  >>>>>>>>>>>>>>>>>
-    >>>>>>>>    >>>>>>>>>>>>>
-
-    >                       >
-      >>>>>>>>>>>>>>>>>>>>> 
-
-          SakoEngine              ")
-
 message(NOTICE "Building Version " ${PROJECT_VERSION})
 
 set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
