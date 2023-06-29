@@ -12,7 +12,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 message(NOTICE "Building Version " ${PROJECT_VERSION})
 
-set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
+if (WIN32)
+  message("Setting module path")
+  set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
+else()
+  message("Using default Module path")
+endif()
 
 # modules (its called vendor in the CMakelists.txt of ./lib)
 # TODO:: Change library name
