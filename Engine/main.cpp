@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
   // Window to place renderer in
   SDL_Window *window =
-      SDL_CreateWindow("SakoEngine", 800, 800, SDL_WINDOW_OPENGL);
+      SDL_CreateWindow("SakoEngine", 800, 800, SDL_WINDOW_VULKAN);
 
   if (window == NULL) {
     SDL_Log("%s", "how did you fail to make the window??", SDL_GetError());
@@ -30,8 +30,6 @@ int main(int argc, char *argv[]) {
 
   // pauses execution in miliseconds
   //  SDL_Delay(3000);
-
-  void PrintKeyInfo(SDL_KeyboardEvent * key);
 
   // tells SDL2 that the game
   while (isRunning) {
@@ -43,7 +41,6 @@ int main(int argc, char *argv[]) {
         break;
       case SDL_EVENT_KEY_DOWN:
       case SDL_EVENT_KEY_UP:
-        PrintKeyInfo(&event.key);
       case SDL_EVENT_QUIT:
         isRunning = false;
         break;
