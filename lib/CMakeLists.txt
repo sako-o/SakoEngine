@@ -2,7 +2,7 @@ add_subdirectory(SDL)
 add_subdirectory(SDL_image)
 # SDL3 Options 
 set(SDL_TEST OFF)
-set(BUILD_SHARED_LIBS ON)
+#set(BUILD_SHARED_LIBS ON)
 
 # SDL_IMAGE options
 set(SDL3IMAGE_AVIF OFF)
