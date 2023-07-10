@@ -1,15 +1,9 @@
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
-    nativeBuildInputs = with pkgs; [
-      gcc
+     nativeBuildInputs = with pkgs; [
       xorg.libX11
       xorg.libX11.dev
+      xorg.libxcb.dev
+      pkg-config
     ];
-    buildInputs = with pkgs; [
-      glibc.static
-      xorg.libX11
-      xorg.libX11.dev
-    ];
-
-    LD_LIBRARY_PATH = "${lib.makeLibraryPath buildInputs}";
 }
