@@ -1,5 +1,8 @@
+# for libX11
+find_package(X11)
 add_subdirectory(SDL)
 add_subdirectory(SDL_image)
+
 # SDL3 Options 
 set(SDL_TEST OFF)
 #set(BUILD_SHARED_LIBS ON)
@@ -23,5 +26,5 @@ set(SDL3IMAGE_XCF OFF)
 set(SDL3IMAGE_XPM OFF)
 
 add_library(vendor INTERFACE)
-target_link_libraries(vendor INTERFACE SDL3::SDL3 SDL3_image::SDL3_image)
+target_link_libraries(vendor INTERFACE SDL3::SDL3 SDL3_image::SDL3_image libX11) 
 
