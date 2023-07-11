@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   SDL_Init(SDL_INIT_EVERYTHING);
   // check if SDL_Init worked properly
   if (!SDL_INIT_EVERYTHING) {
-    SDL_Log("%s", "SDL2 failed??? ", SDL_GetError());
+    printf("SDL failed to initalize: %s\n", SDL_GetError());
     return 1;
   }
 
