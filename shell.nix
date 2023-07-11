@@ -1,9 +1,5 @@
 with import <nixpkgs> {};
 
-let
-  buildInputs = [ xorg.libX11.dev xorg.libXext ];
-in
-
 mkShell {
   nativeBuildInputs = [
     pkg-config 
@@ -14,7 +10,10 @@ mkShell {
   buildInputs = [
     xorg.libX11 
     xorg.libXext
-    
+    xorg.libXrandr
+    xorg.libXcursor
+    xorg.xinput
+    libzip
   ];
 
 }
