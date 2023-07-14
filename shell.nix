@@ -13,6 +13,8 @@ mkShell {
     xorg.libXrandr
     xorg.libXcursor
     xorg.xinput
+    glfw
+    glew
     libzip
   ];
 
