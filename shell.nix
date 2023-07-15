@@ -13,6 +13,8 @@ mkShell {
     xorg.libXrandr
     xorg.libXcursor
     xorg.xinput
+    SDL2
+    SDL2_image
     glfw
     glew
     libzip
