@@ -2,17 +2,22 @@ with import <nixpkgs> {};
 
 mkShell {
   nativeBuildInputs = [
+    clang-tools
     pkg-config 
     cmake 
     gnumake
     gcc
   ];
   buildInputs = [
-    xorg.libX11 
-    xorg.libXext
+    xorg.libX11
     xorg.libXrandr
-    xorg.libXcursor
-    xorg.xinput
+    xorg.libXrender
+    xorg.libXScrnSaver
+    xorg.libXext
+    xorg.libXft
+    xorg.libXpm.out
+    xorg.libXrandr
+    xorg.libXrender
     SDL2
     SDL2_image
     glfw
