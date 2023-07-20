@@ -18,6 +18,7 @@ mkShell {
     xorg.libXpm.out
     xorg.libXrandr
     xorg.libXrender
+    libGL
     SDL2
     SDL2_image
     glfw
