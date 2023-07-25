@@ -31,6 +31,7 @@ mkShell {
     freeglut
     libGL
     mesa
+    mesa_glu
     # We build SDL from source to get to
     # SDL3, so we don't need this 
     #SDL2
