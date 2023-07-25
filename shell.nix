@@ -19,6 +19,8 @@ mkShell {
     xorg.libXpm.out
     xorg.libXrandr
     xorg.libXrender
+    xorg.libXcursor
+    xorg.libXinput
     ## END XORG ##
     ## WAYLAND ##
     ## END WAYLAND ##
