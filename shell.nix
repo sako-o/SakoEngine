@@ -35,4 +35,6 @@ mkShell {
     libzip
   ];
 
+  LD_LIBRARY_PATH="/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+
 }
