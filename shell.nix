@@ -9,6 +9,7 @@ mkShell {
     gcc
   ];
   buildInputs = [
+    ## XORG ##
     xorg.libX11
     xorg.libXrandr
     xorg.libXrender
@@ -18,11 +19,19 @@ mkShell {
     xorg.libXpm.out
     xorg.libXrandr
     xorg.libXrender
-    libGL
-    SDL2
-    SDL2_image
-    glfw
+    ## END XORG ##
+    ## WAYLAND ##
+    ## END WAYLAND ##
+    # OpenGL support for windows
+    freeglut
     glew
+    glfw
+    mesa
+    # We build SDL from source to get to
+    # SDL3, so we don't need this 
+    #SDL2
+    #SDL2_image
+    # Extras go here
     libzip
   ];
 
