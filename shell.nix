@@ -24,8 +24,7 @@ mkShell {
     ## END WAYLAND ##
     # OpenGL support for windows
     freeglut
-    glew
-    glfw
+    libGL
     mesa
     # We build SDL from source to get to
     # SDL3, so we don't need this 
