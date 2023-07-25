@@ -27,7 +27,6 @@ mkShell {
     # OpenGL support for windows
     freeglut
     libGL
-    OpenGL
     mesa
     # We build SDL from source to get to
     # SDL3, so we don't need this 
