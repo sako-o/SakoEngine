@@ -21,9 +21,12 @@ mkShell {
     xorg.libXrender
     xorg.libXcursor
     xorg.xinput
+    xorg.xorgproto
     ## END XORG ##
     ## WAYLAND ##
     ## END WAYLAND ##
+    # SDL Requirements
+    libdrm
     # OpenGL support for windows
     freeglut
     libGL

@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
   // Window to place renderer in
   SDL_Window *window =
-      SDL_CreateWindow("SakoEngine", 800, 600, SDL_WINDOW_VULKAN);
+      SDL_CreateWindow("SakoEngine", 800, 600, SDL_WINDOW_OPENGL);
 
   if (window == NULL) {
     // SDL_Log("%s", "how did you fail to make the window??", SDL_GetError());
