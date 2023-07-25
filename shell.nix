@@ -20,7 +20,7 @@ mkShell {
     xorg.libXrandr
     xorg.libXrender
     xorg.libXcursor
-    xorg.libXinput
+    xorg.xinput
     ## END XORG ##
     ## WAYLAND ##
     ## END WAYLAND ##
