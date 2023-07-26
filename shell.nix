@@ -22,18 +22,19 @@ mkShell {
     xorg.libXrender
     xorg.libXcursor
     xorg.xinput
+    xorg.libXi
+    xorg.libICE
     xorg.xorgproto
+    xorg.libXinerama
+    xorg.libXxf86vm
     ## END XORG ##
     ## WAYLAND ##
     ## END WAYLAND ##
     # SDL Requirements
     libdrm
-    # OpenGL support for windows
-    freeglut
-    libGL
-    libGLU
     mesa
-    mesa_glu
+    # OpenGL support for windows
+    libGL
     # vulkan
     vulkan-headers
     vulkan-loader
@@ -44,6 +45,11 @@ mkShell {
     #SDL2_image
     # Extras go here
     libzip
+    udev
+    libiconv
+    # audio
+    libpulseaudio
+    pipewire
     # lsp for neovim
   ];
 
