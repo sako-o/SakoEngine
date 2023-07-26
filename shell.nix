@@ -30,7 +30,7 @@ mkShell {
     ## END XORG ##
     ## WAYLAND ##
     ## END WAYLAND ##
-    # SDL Requirements
+    # Nvidia Proprietary Linux  
     libdrm
     mesa
     # OpenGL support for windows
@@ -44,6 +44,7 @@ mkShell {
     #SDL2
     #SDL2_image
     # Extras go here
+    zlib
     libzip
     udev
     libiconv
