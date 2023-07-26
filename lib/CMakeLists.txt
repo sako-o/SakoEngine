@@ -2,6 +2,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 add_subdirectory(SDL)
 add_subdirectory(SDL_image)
 find_package(OpenGL REQUIRED)
+# TODO(sako) copy libGL to bin folder
+# https://stackoverflow.com/questions/20746936/what-use-is-find-package-when-you-need-to-specify-cmake-module-path
+# https://stackoverflow.com/questions/20833226/library-headers-and-define/20838147#20838147
 
 # SDL3 Options 
 set(SDL_TEST OFF)
