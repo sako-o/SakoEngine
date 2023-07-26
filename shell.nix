@@ -2,6 +2,7 @@ with import <nixpkgs> {};
 
 mkShell {
   nativeBuildInputs = [
+    clang
     clang-tools
     pkg-config 
     cmake 
@@ -30,6 +31,7 @@ mkShell {
     # OpenGL support for windows
     freeglut
     libGL
+    libGLU
     mesa
     mesa_glu
     # We build SDL from source to get to
@@ -38,6 +40,7 @@ mkShell {
     #SDL2_image
     # Extras go here
     libzip
+    # lsp for neovim
   ];
 
   LD_LIBRARY_PATH="/run/opengl-driver/lib:/run/opengl-driver-32/lib";
