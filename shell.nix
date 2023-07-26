@@ -2,7 +2,6 @@ with import <nixpkgs> {};
 
 mkShell {
   nativeBuildInputs = [
-    clang
     clang-tools
     pkg-config 
     cmake 
