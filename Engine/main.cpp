@@ -7,7 +7,7 @@
 #include <SDL_image.h>
 #include <SDL_timer.h>
 #include <stdio.h>
-#include <GL/gl.h>
+#include <SDL_opengl.h>
 
 int main(int argc, char *argv[]) {
   // init everything
