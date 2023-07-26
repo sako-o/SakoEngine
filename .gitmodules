@@ -4,6 +4,3 @@
 [submodule "lib/SDL_image"]
 	path = lib/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
-[submodule "lib/libx11"]
-	path = lib/libx11
-	url = https://gitlab.freedesktop.org/xorg/lib/libx11.git
