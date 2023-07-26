@@ -34,6 +34,10 @@ mkShell {
     libGLU
     mesa
     mesa_glu
+    # vulkan
+    vulkan-headers
+    vulkan-loader
+    vulkan-validation-layers
     # We build SDL from source to get to
     # SDL3, so we don't need this 
     #SDL2
