@@ -40,8 +40,8 @@ mkShell {
     vulkan-validation-layers
     # We build SDL from source to get to
     # SDL3, so we don't need this 
-    #SDL2
-    #SDL2_image
+    SDL2.dev
+    SDL2_image
     # Extras go here
     zlib
     libzip
