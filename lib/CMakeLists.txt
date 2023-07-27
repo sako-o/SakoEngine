@@ -2,6 +2,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 add_subdirectory(SDL)
 add_subdirectory(SDL_image)
 find_package(OpenGL REQUIRED)
+find_package(Vulkan REQUIRED)
 # TODO(sako) copy libGL to bin folder
 # https://stackoverflow.com/questions/20746936/what-use-is-find-package-when-you-need-to-specify-cmake-module-path
 # https://stackoverflow.com/questions/20833226/library-headers-and-define/20838147#20838147
@@ -34,4 +35,5 @@ target_link_libraries(vendor INTERFACE
   SDL3_image::SDL3_image 
   OpenGL
   OpenGL::EGL
+  Vulkan
 ) 
