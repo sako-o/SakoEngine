@@ -30,5 +30,9 @@ set(SDL3IMAGE_XPM OFF)
 
 add_library(vendor INTERFACE)
 include_directories("${OPENGL_INCLUDE_DIR}")
-target_link_libraries(vendor INTERFACE SDL3::SDL3 SDL3_image::SDL3_image OpenGL) 
-
+target_link_libraries(vendor INTERFACE 
+  SDL3::SDL3 
+  SDL3_image::SDL3_image 
+  OpenGL
+  OpenGL::EGL
+) 
