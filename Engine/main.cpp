@@ -8,6 +8,7 @@
 #include <SDL_timer.h>
 #include <stdio.h>
 #include <SDL_opengl.h>
+#include <SDL_vulkan.h>
 
 int main(int argc, char *argv[]) {
   // init everything
