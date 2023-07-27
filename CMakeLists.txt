@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.51)
+cmake_minimum_required(VERSION 3.5.1)
 project(SakoEngine VERSION 0.0.1)
 
 # cause we need the dll and stuff :D
