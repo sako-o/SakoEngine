@@ -34,9 +34,10 @@ mkShell {
     mesa
     # OpenGL support for windows
     libGL
-    # vulkan
+    # vulkan for linux
     vulkan-headers
     vulkan-loader
+    vulkan-tools
     vulkan-validation-layers
     # We build SDL from source to get to
     # SDL3, so we don't need this 
