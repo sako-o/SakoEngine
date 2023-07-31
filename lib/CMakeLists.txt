@@ -9,13 +9,13 @@ find_package(Vulkan REQUIRED)
 
 if (OPENGL_FOUND)
   message("OpenGL Found!")
-else
+else()
   message("WARNING! OpenGL is Missing! Please install libGL")
 endif()
 
 if (VULKAN_FOUND)
   message("Vulkan Found!")
-else
+else()
   message("WARNING! Vulkan is Missing! Install the Vulkan library for linux/android support!")
 endif()
 
