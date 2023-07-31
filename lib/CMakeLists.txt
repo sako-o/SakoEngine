@@ -9,6 +9,7 @@ find_package(Vulkan REQUIRED)
 
 # SDL3 Options 
 set(SDL_TEST OFF)
+set(SDL_TEST_LIBRARY OFF)
 set(BUILD_SHARED_LIBS ON)
 
 # SDL_IMAGE options
@@ -35,5 +36,5 @@ target_link_libraries(vendor INTERFACE
   SDL3_image::SDL3_image 
   OpenGL
   OpenGL::EGL
-  Vulkan::Vulkan
+  Vulkan
 ) 
