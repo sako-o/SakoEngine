@@ -20,8 +20,8 @@ else()
 endif()
 
 # SDL3 Options 
-set(SDL_TEST OFF)
-set(SDL_TEST_LIBRARY OFF)
+set(SDL_TEST ON)
+set(SDL_TEST_LIBRARY ON)
 set(BUILD_SHARED_LIBS ON)
 
 if (BUILD_SHARED_LIBS)
