@@ -1,3 +1,5 @@
+#include "SDL_init.h"
+#include "SDL_video.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -7,12 +9,15 @@
 
 int main(int argc, char *argv[]) {
   // init everything
-  SDL_Init(SDL_INIT_EVERYTHING);
+  // SDL_Init(SDL_INIT_EVERYTHING);
   // check if SDL_Init worked properly
-  if (!SDL_INIT_EVERYTHING) {
-    printf("SDL failed to initalize: %s\n", SDL_GetError());
-    return 1;
-  }
+  // if (!SDL_INIT_EVERYTHING) {
+  // printf("SDL failed to initalize: %s\n", SDL_GetError());
+  //  return 1;
+  //}
+
+  SDL_Init(SDL_INIT_VIDEO);
+  SDL_Vulkan_LoadLibrary(nullptr);
 
   // Window to place renderer in
   SDL_Window *window = SDL_CreateWindow("SakoEngine", 800, 600, SDL_WINDOW_VULKAN);
