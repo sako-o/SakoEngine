@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
 
 # for neovim/vim clangd language server
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 message(NOTICE "Building Version " ${PROJECT_VERSION})
 
