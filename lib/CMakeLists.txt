@@ -26,7 +26,7 @@ set(BUILD_SHARED_LIBS ON)
 
 if (BUILD_SHARED_LIBS)
   message("Building with shared libraries!")
-else
+else()
   message("Building static libraries")
 endif()
 
