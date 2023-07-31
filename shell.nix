@@ -54,4 +54,5 @@ mkShell {
     # lsp for neovim
   ];
 
+  VULKAN_SDK = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
 }
