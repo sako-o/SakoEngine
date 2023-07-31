@@ -15,6 +15,9 @@ int main(int argc, char *argv[]) {
   // printf("SDL failed to initalize: %s\n", SDL_GetError());
   //  return 1;
   //}
+  //
+  // vulkan tutorial
+  // https://github.com/AndreVallestero/sdl-vulkan-tutorial/blob/master/hello-triangle/main.cpp
 
   SDL_Init(SDL_INIT_VIDEO);
   SDL_Vulkan_LoadLibrary(nullptr);
