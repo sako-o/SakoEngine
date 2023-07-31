@@ -7,10 +7,28 @@ find_package(Vulkan REQUIRED)
 # https://stackoverflow.com/questions/20746936/what-use-is-find-package-when-you-need-to-specify-cmake-module-path
 # https://stackoverflow.com/questions/20833226/library-headers-and-define/20838147#20838147
 
+if (OPENGL_FOUND)
+  message("OpenGL Found!")
+else
+  message("WARNING! OpenGL is Missing! Please install libGL")
+endif()
+
+if (VULKAN_FOUND)
+  message("Vulkan Found!")
+else
+  message("WARNING! Vulkan is Missing! Install the Vulkan library for linux/android support!")
+endif()
+
 # SDL3 Options 
 set(SDL_TEST OFF)
 set(SDL_TEST_LIBRARY OFF)
 set(BUILD_SHARED_LIBS ON)
+
+if (BUILD_SHARED_LIBS)
+  message("Building with shared libraries!")
+else
+  message("Building static libraries")
+endif()
 
 # SDL_IMAGE options
 set(SDL3IMAGE_AVIF OFF)
