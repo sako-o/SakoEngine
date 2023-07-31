@@ -1,14 +1,9 @@
-#include "SDL_error.h"
-#include "SDL_events.h"
-#include "SDL_init.h"
-#include "SDL_log.h"
-#include "SDL_video.h"
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_timer.h>
 #include <stdio.h>
 #include <SDL_opengl.h>
 #include <SDL_vulkan.h>
+#include <vulkan/vulkan.hpp>
 
 int main(int argc, char *argv[]) {
   // init everything
