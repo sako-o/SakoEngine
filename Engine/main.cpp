@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <SDL_opengl.h>
 #include <SDL_vulkan.h>
-#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan.h>
 
 int main(int argc, char *argv[]) {
   // init everything
