@@ -24,6 +24,10 @@ endif()
 
 # modules (its called vendor in the CMakelists.txt of ./lib)
 # TODO:: Change library name
-add_subdirectory(lib)
+#add_subdirectory(lib)
+
+# want to try something
+find_package(SDL)
+find_package(SDL_image)
 
 add_subdirectory(Engine/)
