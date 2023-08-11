@@ -27,7 +27,7 @@ endif()
 #add_subdirectory(lib)
 
 # want to try something
-find_package(SDL2 REQUIRED) 
-find_package(SDL2_image REQUIRED)
+find_package(SDL)
+find_package(SDL_image)
 
 add_subdirectory(Engine/)

@@ -47,7 +47,6 @@
       # We build SDL from source to get to
       # SDL3, so we don't need this
       SDL2.dev
-      SDL2
       SDL2_image
       # Extras go here
       zlib
