@@ -19,7 +19,7 @@
       xorg.libXrandr
       xorg.libXrender
       xorg.libXScrnSaver
-      xorg.libXext
+      xorg.libXext.dev
       xorg.libXft
       xorg.libXpm.out
       xorg.libXrandr
