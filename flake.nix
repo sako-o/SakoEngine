@@ -26,7 +26,7 @@
       SDL2_image
     ];
     windowsNativeBuildInputs = with pkgs; [
-      pkgsCross.mingwW64.stdenv.cc
+      pkgsCross.mingwW64.buildPackages.gcc
     ];
   in {
     devShells.${system}.default = pkgs.mkShell {
