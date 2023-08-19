@@ -44,11 +44,11 @@ int main(int argc, char *argv[]) {
       // TODO(sako) fix this
       default:
         break;
-      case SDL_EVENT_KEY_DOWN:
+      case SDL_KEYDOWN:
         isRunning = false;
-      case SDL_EVENT_KEY_UP:
+      case SDL_KEYUP:
         isRunning = false;
-      case SDL_EVENT_QUIT:
+      case SDL_QUIT:
         isRunning = false;
         break;
       }
