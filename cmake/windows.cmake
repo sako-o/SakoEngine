@@ -18,6 +18,8 @@ set(CMAKE_RC_COMPILER ${TOOLCHAIN_PREFIX}-windres)
 # TODO(sako) make use check for nix using command
 # nix eval --expr '1 + 2'
 #set(CMAKE_FIND_ROOT_PATH /usr/${TOOLCHAIN_PREFIX} /usr/lib/gcc/${TOOLCHAIN_PREFIX}/7.3-posix)
+set(CMAKE_FIND_ROOT_PATH  /usr/i586-mingw32msvc
+    /home/alex/mingw-install)
 
 
 # modify default behavior of FIND_XXX() commands to
