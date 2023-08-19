@@ -1,6 +1,5 @@
-#include "SDL_init.h"
-#include "SDL_video.h"
 #include <SDL.h>
+#include <SDL_events.h>
 #include <SDL_image.h>
 #include <stdio.h>
 #include <SDL_opengl.h>
@@ -23,7 +22,7 @@ int main(int argc, char *argv[]) {
   SDL_Vulkan_LoadLibrary(nullptr);
 
   // Window to place renderer in
-  SDL_Window *window = SDL_CreateWindow("SakoEngine", 800, 600, SDL_WINDOW_VULKAN);
+  SDL_Window *window = SDL_CreateWindow("SakoEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_VULKAN);
 
   if (window == NULL) {
     // SDL_Log("%s", "how did you fail to make the window??", SDL_GetError());
@@ -42,6 +41,7 @@ int main(int argc, char *argv[]) {
     SDL_Event event;
     while (SDL_PollEvent(&event))
       switch (event.type) {
+      // TODO(sako) fix this
       default:
         break;
       case SDL_EVENT_KEY_DOWN:

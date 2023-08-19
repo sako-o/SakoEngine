@@ -14,6 +14,13 @@
       gnumake
     ];
     buildInputs = with pkgs; [
+      # OpenGL
+      libGL
+      # Vulkan
+      vulkan-headers
+      vulkan-loader
+      vulkan-tools
+      vulkan-validation-layers
       # SDL2
       SDL2.dev
       SDL2_image
