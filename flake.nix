@@ -25,11 +25,15 @@
       SDL2.dev
       SDL2_image
     ];
+    windowsNativeBuildInputs = with pkgs; [
+      pkgsCross.mingwW64.stdenv.cc
+    ];
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         nativeBuildInputs
         buildInputs
+        windowsNativeBuildInputs
       ];
       # ...
     };
