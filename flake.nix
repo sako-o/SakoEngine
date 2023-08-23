@@ -35,7 +35,7 @@
         buildInputs
         windowsNativeBuildInputs
       ];
-      # ...
+        mingwW64dir = "${pkgs.pkgsCross.mingwW64.buildPackages.gcc}";
     };
   };
 }
