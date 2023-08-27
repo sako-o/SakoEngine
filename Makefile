@@ -4,6 +4,7 @@ windows:
 	mkdir -p build
 	mkdir -p build/windows
 	cmake -S . -B build/windows 
+	cmake --build build/windows
 
 linux:
 	mkdir -p build
