@@ -9,6 +9,7 @@ linux:
 	mkdir -p build
 	mkdir -p build/linux
 	cmake -S . -B build/linux
+	cmake --build build/linux
 
 mac:
 	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⣤⣤⣴⡶⠶⠶⠶⠶⠶⠶⠶⠶⠤⠤⢤⣤⣤⣤⣤⣤⣄⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
