@@ -40,9 +40,6 @@ int main(int argc, char *argv[]) {
 
   bool isRunning = true;
 
-  // pauses execution in miliseconds
-  SDL_Delay(2000);
-
   // tells SDL2 that the game
   while (isRunning) {
     // TODO(sako) think of a better name for this
