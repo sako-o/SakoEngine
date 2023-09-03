@@ -1,9 +1,5 @@
-#include <SDL.h>
-#include <SDL_events.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
-#include <SDL_opengl.h>
-#include <SDL_vulkan.h>
 #include <vulkan/vulkan.h>
 
 int main(int argc, char *argv[]) {
@@ -19,7 +15,6 @@ int main(int argc, char *argv[]) {
   // https://github.com/AndreVallestero/sdl-vulkan-tutorial/blob/master/hello-triangle/main.cpp
 
   SDL_Init(SDL_INIT_VIDEO);
-  SDL_Vulkan_LoadLibrary(nullptr);
 
   // Window to place renderer in
   SDL_Window *window = SDL_CreateWindow("SakoEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_VULKAN);
