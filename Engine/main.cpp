@@ -57,9 +57,16 @@ int main(int argc, char *argv[]) {
         isRunning = false;
         break;
       }
+
+        // clear screen
+        SDL_RenderClear(renderer);
+
+        // update screen
+        SDL_RenderPresent(renderer);
   }
 
   SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(renderer);
 
   SDL_Quit();
 
