@@ -1,28 +1,18 @@
 # SakoEngine
 
-### this is a horrible idea
+Progress can be monitoried via the Projects tab
 
-Progress can be monitored in Projects tab
+## Branch Structure
+master < latest stable
+develop < everything happens here
 
-# Project Structure
+## Building 
 
-## Engine
+Windows
+    TODO
 
-    Engine
+Mac
+    not until another 15 years
 
-## Physicks
-
-    Physics for Engine???
-
-## GPG KEY
-
-    https://github.com/Sakooooo/gpg-keys/blob/master/sako_public.asc
-
-## build
-
-Nix/Nixos
-just run `nix-shell` lmao
-`    nix-shell
-    mkdir build
-    cmake -S . -B ./build
-    cd build && make`
+Nix
+`nix develop; make linux`
