@@ -1,2 +1,6 @@
-// bro i messed up
-// we gotta go bald
+#include <iostream>
+
+int main() {
+  std::cout << "heloro" << std::endl;
+  return 0;
+}
