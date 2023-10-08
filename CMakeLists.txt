@@ -1,6 +1,19 @@
 cmake_minimum_required(VERSION 3.25.3)
 project(SakoEngine VERSION 0.0.1)
 
+message("Setting up Generator")
+
+if (WIN32)
+  set(CMAKE_GENERATOR "MinGW Makefiles")
+  message("generator is set to ${CMAKE_GENERATOR}")
+elseif (LINUX)
+  set(CMAKE_GENERATOR "Unix Makefiles")
+  message("generator is set to ${CMAKE_GENERATOR}")
+  message("theres no way anybody actually uses clang right?")
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  message([FATAL_ERROR] "building on macos isnt supported yet")
+endif()
+
 # cause we need the dll and stuff :D
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -14,10 +27,10 @@ set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if (WIN32)
-  message("We need to define the module path on windows for some reason.")
+  message("we need to define the module path on windows for some reason.")
   set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
 else()
-  message("Using default Module path")
+  message("using default Module path")
 endif()
 
 add_subdirectory(Engine/)
