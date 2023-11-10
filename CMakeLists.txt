@@ -34,4 +34,7 @@ else()
   message("using default Module path")
 endif()
 
+# libraries
+add_subdirectory(lib/)
+# engine
 add_subdirectory(Engine/)
