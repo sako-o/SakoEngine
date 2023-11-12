@@ -1,4 +1,5 @@
-#include "SDL.h"
+#include <iostream>
+#include <SDL.h>
 
 int main() {
   std::cout << "heloro" << std::endl;
