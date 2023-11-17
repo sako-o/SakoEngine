@@ -8,3 +8,5 @@ https://youtu.be/jTKM7NjlacY?list=LL&t=2197
 ** TODO Setup Nix Flake 
 * CI
 ** TODO Setup basic CI
+* GUI
+** TODO Setup imgui
