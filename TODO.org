@@ -1,0 +1,7 @@
+#+title: SakoEngine TODO List
+
+* Depency Related things
+** TODO Setup SDL_Image
+** TODO Setup Nix Flake 
+* CI
+** TODO Setup basic CI
