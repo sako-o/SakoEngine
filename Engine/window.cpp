@@ -9,5 +9,6 @@ Window::Window(const std::string &title, int width, int height,
 
   if(!m_window) 
     throw std::runtime_error(SDL_GetError());
-  
+
+
 };

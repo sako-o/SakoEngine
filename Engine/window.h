@@ -14,6 +14,6 @@ class Window {
 
  public:
   // TODO(sako):: Once make default dropin, set to windowed fullscreen as default.
-  Window(const std::string &title, int width = 800, int height = 600, SDL_WindowFlags flags = (SDL_WindowFlags) 0); 
+  explicit Window(const std::string &title, int width = 800, int height = 600, SDL_WindowFlags flags = (SDL_WindowFlags) 0); 
 
 };

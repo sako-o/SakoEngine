@@ -1,19 +1,23 @@
 #include "SDL_events.h"
-#include "SDL_init.h"
-#include "SDL_log.h"
-#include "SDL_render.h"
 #include "SDL_video.h"
 #include <iostream>
 #include <SDL.h>
+#include "window.h"
+#include "sakoengine.h"
 
 int main() {
 
   // turn on everything
 
-  if (!SDL_INIT_EVERYTHING) {
-    std::cout << "[CRITICAL] SDL3 FAILED TO LOAD!" << std::endl;
-    return 1;
-  };
+  // done in sakoengine.cpp
+  // if (!SDL_INIT_EVERYTHING) {
+  //   std::cout << "[CRITICAL] SDL3 FAILED TO LOAD!" << std::endl;
+  //   return 1;
+  // };
+
+  // SakoEngine::init();
+
+  SakoEngine::init();
 
   // predefined height
 
@@ -22,24 +26,24 @@ int main() {
 
   // create window
 
-  SDL_Window* window = SDL_CreateWindow("SakoEngine DEV", width, height, SDL_WINDOW_OPENGL);
-
-  if (!window) {
-    SDL_Log("[CRITICAL] SDL failed to create window!");
-    return 1;
-  }
+  Window window("SakoEngine");
+  // Window window2("SakoEngine 2");
 
   // renderer to display window on *NIX
   // on Windows systems the window will show without one
 
-  SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL, SDL_RENDERER_ACCELERATED);
+  // SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL, SDL_RENDERER_ACCELERATED);
 
-  if (!renderer) {
-    SDL_Log("[CRITICAL SDL failed to create renderer!");
-    return 1;
-  };
+  // if (!renderer) {
+  //   SDL_Log("[CRITICAL SDL failed to create renderer!");
+  //   return 1;
+  // };
 
   // game loop
+
+  {
+
+  Window window("SakoEngine");
 
   bool running = true;
 
@@ -61,10 +65,12 @@ int main() {
     
   };
   
+  }
 
   // destroy renderer
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
+  //SDL_DestroyRenderer(renderer);
+  // SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
+
+  SakoEngine::quit();
   return 0;
 }
