@@ -1,5 +1,7 @@
 #include "SDL_events.h"
+#include "SDL_log.h"
 #include "SDL_video.h"
+#include <exception>
 #include <iostream>
 #include <SDL.h>
 #include "window.h"
@@ -26,7 +28,7 @@ int main() {
 
   // create window
 
-  Window window("SakoEngine");
+  // Window window("SakoEngine");
   // Window window2("SakoEngine 2");
 
   // renderer to display window on *NIX
@@ -43,7 +45,10 @@ int main() {
 
   {
 
-  Window window("SakoEngine");
+    // create window
+  // Window window("SakoEngine");
+
+    Window window("SakoEngine");
 
   bool running = true;
 

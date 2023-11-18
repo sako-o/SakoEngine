@@ -7,7 +7,7 @@ void SakoEngine::init() {
   // TODO(sako) make it read through an array to init each submodule
   // TODO(sako) add extra submodules 
   if (!SDL_INIT_EVERYTHING)
-    SDL_LogCritical(SDL_LogCategory::SDL_LOG_CATEGORY_ERROR, SDL_GetError());
+   SDL_LogCritical(SDL_LogCategory::SDL_LOG_CATEGORY_ERROR, SDL_GetError());
   
 }
 

@@ -4,6 +4,7 @@
 #include <expected>
 #include <iostream>
 #include <string>
+#include <optional>
 
 class SakoEngine {
 
@@ -12,5 +13,5 @@ class SakoEngine {
   static void init();
 
   static void quit();
-  
+
 };
