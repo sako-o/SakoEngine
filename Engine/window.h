@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SDL_render.h"
 #include "SDL_video.h"
 #include <SDL.h>
 #include <memory>
@@ -11,6 +12,9 @@ class Window {
   // dealocate SDL_Window pointer 
   // decltype takes the type of function pointer decltype added in C++11
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_window; 
+
+  // TODO(sako):: Actually make this 
+  std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_renderer; 
 
  public:
   // TODO(sako):: Once make default dropin, set to windowed fullscreen as default.

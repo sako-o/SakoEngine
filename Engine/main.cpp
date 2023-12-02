@@ -1,5 +1,6 @@
 #include "SDL_events.h"
 #include "SDL_log.h"
+#include "SDL_render.h"
 #include "SDL_video.h"
 #include <exception>
 #include <iostream>
