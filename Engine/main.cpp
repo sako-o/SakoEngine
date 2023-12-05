@@ -46,11 +46,6 @@ int main() {
 
   {
 
-    // create window
-  // Window window("SakoEngine");
-
-    Window window("SakoEngine");
-
   bool running = true;
 
   while (running) {
