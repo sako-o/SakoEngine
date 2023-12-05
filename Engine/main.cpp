@@ -32,6 +32,10 @@ int main() {
   // Window window("SakoEngine");
   // Window window2("SakoEngine 2");
 
+  Window w;
+
+  w.CreateWindow("SakoEngine", width, height, SDL_WINDOW_OPENGL, SDL_RENDERER_ACCELERATED);
+
   // renderer to display window on *NIX
   // on Windows systems the window will show without one
 
