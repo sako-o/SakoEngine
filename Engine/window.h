@@ -13,6 +13,6 @@ private:
 
 public:
   
-  int CreateWindow(const std::string &title, int width, int height, SDL_WindowFlags flags, SDL_RendererFlags renderer_flags);
+  Window(const std::string &title, int width, int height, SDL_WindowFlags flags, SDL_RendererFlags renderer_flags);
 
 };
