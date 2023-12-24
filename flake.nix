@@ -19,13 +19,11 @@
       xorg.libX11
       xorg.libX11.dev
       xorg.xorgproto
-      xorg.xorgproto.dev
       xorg.libICE
       xorg.libICE.dev
       xorg.libXi
       xorg.libXi.dev
       xorg.libXScrnSaver
-      xorg.libXScrnSaver.dev
       xorg.libXcursor
       xorg.libXcursor.dev
       xorg.libXinerama
