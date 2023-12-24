@@ -28,6 +28,7 @@
       xorg.libXext
       xorg.libXext.dev
       xorg.libxcb
+      xorg.libxcb.dev
       # for audio libraries
       pipewire
       libpulseaudio
