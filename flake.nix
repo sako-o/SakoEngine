@@ -15,16 +15,27 @@
     ];
     sdlDeps = with pkgs; [
       # xorg deps
+      # FIXME: Surely theres a better way to this? We are we adding .dev for #include to work
       xorg.libX11
+      xorg.libX11.dev
       xorg.xorgproto
+      xorg.xorgproto.dev
       xorg.libICE
+      xorg.libICE.dev
       xorg.libXi
+      xorg.libXi.dev
       xorg.libXScrnSaver
+      xorg.libXScrnSaver.dev
       xorg.libXcursor
+      xorg.libXcursor.dev
       xorg.libXinerama
+      xorg.libXinerama.dev
       xorg.libXext
+      xorg.libXext.dev
       xorg.libXrandr
+      xorg.libXrandr.dev
       xorg.libXxf86vm
+      xorg.libXxf86vm.dev
       xorg.libXext
       xorg.libXext.dev
       xorg.libxcb
