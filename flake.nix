@@ -1,7 +1,7 @@
 {
   description = "SakoEngine flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
   };
   outputs = {nixpkgs, ...}: let
     system = "x86_64-linux";
@@ -12,6 +12,7 @@
       pkg-config
       cmake
       gnumake
+      gcc
     ];
     buildInputs = with pkgs; [
       # OpenGL
