@@ -38,6 +38,8 @@
       xorg.libXext.dev
       xorg.libxcb
       xorg.libxcb.dev
+      xorg.xrandr
+      xorg.libXfixes
       # for audio libraries
       pipewire
       libpulseaudio
@@ -56,6 +58,7 @@
       # wayland deps
       wayland
       wayland-scanner
+      libdecor
       # extras
       zlib
       libzip
