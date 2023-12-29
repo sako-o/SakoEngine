@@ -1,8 +1,5 @@
 #+title: SakoEngine TODO List
 
-* Use this video as a guide
-https://youtu.be/jTKM7NjlacY?list=LL&t=2197
-
 * Depency Related things
 ** TODO Setup SDL_Image
 ** TODO Setup Nix Flake 
@@ -11,3 +8,5 @@ https://youtu.be/jTKM7NjlacY?list=LL&t=2197
 * GUI
 ** TODO Setup imgui
 * TODO Fix Window.cpp
+* Compiling
+** TODO Make cross compile from Linux to Windows
