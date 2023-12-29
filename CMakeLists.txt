@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25.3)
+cmake_minimum_required(VERSION 3.4)
 project(SakoEngine VERSION 0.0.1)
 
 message("Setting up Generator")
