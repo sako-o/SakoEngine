@@ -1,7 +1,7 @@
-#include "SDL_events.h"
-#include "SDL_log.h"
-#include "SDL_render.h"
-#include "SDL_video.h"
+#include <SDL_events.h>
+#include <SDL_log.h>
+#include <SDL_render.h>
+#include <SDL_video.h>
 #include <exception>
 #include <iostream>
 #include <SDL.h>
@@ -61,9 +61,11 @@ int main() {
 
     while (SDL_PollEvent(&event)) {
       // Event Handling Here
-      if (event.type == SDL_EventType::SDL_EVENT_QUIT) {
-	running = false;
-      };
+      // NEVER use if statements for event handling!!!
+      // dont want to end up like yandredev :P
+      // if (event.type == SDL_EventType::SDL_EVENT_QUIT) {
+      // 	running = false;
+      // };
     };
     
   };
