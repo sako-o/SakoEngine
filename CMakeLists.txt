@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.4)
 project(SakoEngine VERSION 0.0.1)
 
+message("Setting up Generator")
+
 # CXX standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
@@ -13,6 +15,7 @@ SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # support clangd language server
+# this only works with Makefiles though...
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if (WIN32)
