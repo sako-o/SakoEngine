@@ -63,9 +63,9 @@ int main() {
       // Event Handling Here
       // NEVER use if statements for event handling!!!
       // dont want to end up like yandredev :P
-      // if (event.type == SDL_EventType::SDL_EVENT_QUIT) {
-      // 	running = false;
-      // };
+      if (event.type == SDL_EventType::SDL_EVENT_QUIT) {
+	running = false;
+      };
     };
     
   };
