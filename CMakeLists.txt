@@ -1,20 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
 project(SakoEngine VERSION 0.0.1)
 
-message("Setting up Generator")
-
-if (WIN32)
-  set(CMAKE_GENERATOR "MinGW Makefiles")
-  message("generator is set to ${CMAKE_GENERATOR}")
-elseif (LINUX)
-  set(CMAKE_GENERATOR "Unix Makefiles")
-  message("generator is set to ${CMAKE_GENERATOR}")
-  message("theres no way anybody actually uses clang right?")
-  message("wonder if it would work with crosscompiling")
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  message([FATAL_ERROR] "building on macos isnt supported yet")
-endif()
-
 # CXX standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
