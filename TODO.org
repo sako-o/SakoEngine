@@ -8,5 +8,6 @@
 * GUI
 ** TODO Setup imgui
 * TODO Fix Window.cpp
+* TODO Fix SDL_WindowFlags replaced 
 * Compiling
 ** TODO Make cross compile from Linux to Windows
