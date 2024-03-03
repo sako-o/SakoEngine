@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
 project(SakoEngine VERSION 0.0.1)
 
-message("Setting up Generator")
-
 # CXX standard
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
