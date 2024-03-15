@@ -2,8 +2,6 @@
 
 Progress can be monitoried via the Projects tab
 
-# libyuv is just there until SDL_Image gets fixed
-
 ## Branch Structure
 master < latest stable
 develop < everything happens here
