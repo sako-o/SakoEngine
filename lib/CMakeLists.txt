@@ -23,5 +23,8 @@ set(SDL3IMAGE_XCF OFF)
 set(SDL3IMAGE_XPM OFF)
 set(SDL3IMAGE_XV OFF)
 
+# fix not compiling
+set(AVIF_CODEC_AOM_DECODE OFF)
+
 add_library(lib INTERFACE)
 target_link_libraries(lib INTERFACE SDL3::SDL3) 
