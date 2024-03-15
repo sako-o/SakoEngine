@@ -4,3 +4,6 @@
 [submodule "lib/SDL_image"]
 	path = lib/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
+[submodule "lib/libyuv"]
+	path = lib/libyuv
+	url = https://chromium.googlesource.com/libyuv/libyuv
