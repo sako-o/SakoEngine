@@ -1,3 +1,6 @@
+# for SDL_Image
+add_subdirectory(libyuv)
+
 set(SDL_TEST OFF)
 # broken x11 for some reason
 set(SDL_X11 OFF)
