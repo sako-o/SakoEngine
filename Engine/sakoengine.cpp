@@ -32,4 +32,5 @@ void SakoEngine::init() {
 
 void SakoEngine::quit() {
   SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
+  SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_AUDIO);
 }
