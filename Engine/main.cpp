@@ -77,4 +77,5 @@ int main()
 
     SakoEngine::quit();
     return 0;
-  }
+  };
+}
