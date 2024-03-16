@@ -8,7 +8,8 @@
 #include "window.h"
 #include "sakoengine.h"
 
-int main() {
+int main()
+{
 
   // turn on everything
 
@@ -48,34 +49,32 @@ int main() {
 
   {
 
-  bool running = true;
+    bool running = true;
 
-  while (running) {
-    // set the event variable
+    while (running)
+    {
+      // set the event variable
 
-    SDL_Event event;
+      SDL_Event event;
 
-    // SDL_PollEvent uses the event variable's pointer reference (?)
+      // SDL_PollEvent uses the event variable's pointer reference (?)
 
-    //SDL_PollEvent(&event);
+      // SDL_PollEvent(&event);
 
-    while (SDL_PollEvent(&event)) {
-      // Event Handling Here
-      // NEVER use if statements for event handling!!!
-      // dont want to end up like yandredev :P
-      if (event.type == SDL_EventType::SDL_EVENT_QUIT) {
-	running = false;
+      while (SDL_PollEvent(&event))
+      {
+        switch (event.type)
+        {
+        case SDL_EventType::SDL_EVENT_QUIT:
+          running = false;
+        };
       };
-    };
-    
-  };
-  
+    }
+
+    // destroy renderer
+    // SDL_DestroyRenderer(renderer);
+    // SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
+
+    SakoEngine::quit();
+    return 0;
   }
-
-  // destroy renderer
-  //SDL_DestroyRenderer(renderer);
-  // SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
-
-  SakoEngine::quit();
-  return 0;
-}
