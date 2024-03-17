@@ -11,41 +11,19 @@
 int main()
 {
 
-  // turn on everything
-
-  // done in sakoengine.cpp
-  // if (!SDL_INIT_EVERYTHING) {
-  //   std::cout << "[CRITICAL] SDL3 FAILED TO LOAD!" << std::endl;
-  //   return 1;
-  // };
-
-  // SakoEngine::init();
-
+  // init
   SakoEngine::init();
 
+  // todo:: make user customiztable somehow
   // predefined height
-
   int width = 800;
   int height = 800;
 
   // create window
 
-  // Window window("SakoEngine");
-  // Window window2("SakoEngine 2");
-
   Window window("SakoEngine", 800, 800, SDL_WINDOW_OPENGL, SDL_RENDERER_ACCELERATED);
 
-  // renderer to display window on *NIX
-  // on Windows systems the window will show without one
-
-  // SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL, SDL_RENDERER_ACCELERATED);
-
-  // if (!renderer) {
-  //   SDL_Log("[CRITICAL SDL failed to create renderer!");
-  //   return 1;
-  // };
-
-  // game loop
+  // game loop begins here
 
   {
 
@@ -54,13 +32,10 @@ int main()
     while (running)
     {
       // set the event variable
-
       SDL_Event event;
 
-      // SDL_PollEvent uses the event variable's pointer reference (?)
-
-      // SDL_PollEvent(&event);
-
+      // event handling
+      // maybe move this into a function?
       while (SDL_PollEvent(&event))
       {
         switch (event.type)
@@ -71,10 +46,7 @@ int main()
       };
     }
 
-    // destroy renderer
-    // SDL_DestroyRenderer(renderer);
-    // SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
-
+    // cleanup
     SakoEngine::quit();
     return 0;
   };
