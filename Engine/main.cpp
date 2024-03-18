@@ -5,6 +5,7 @@
 #include <exception>
 #include <iostream>
 #include <SDL.h>
+#include "SDL_oldnames.h"
 #include "window.h"
 #include "sakoengine.h"
 
@@ -42,6 +43,13 @@ int main()
         {
         case SDL_EventType::SDL_EVENT_QUIT:
           running = false;
+	case SDL_EventType::SDL_EVENT_KEY_DOWN:
+	  // keypress event 
+	  // this should differenciate between them
+	  if (event.key.keysym.sym == SDL_KeyCode::SDLK_q)
+	    running = false;
+	default:
+	  break;
         };
       };
     }
