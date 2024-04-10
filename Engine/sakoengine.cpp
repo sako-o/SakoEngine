@@ -44,11 +44,10 @@ void SakoEngine::handleEvents() {
 
     while (running)
     {
-      // set the event variable
+      // set the event variable for handling events
       SDL_Event event;
 
-      // event handling
-      // maybe move this into a function?
+      // the actual event handling
       while (SDL_PollEvent(&event))
       {
         switch (event.type)
