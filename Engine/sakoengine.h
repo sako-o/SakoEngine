@@ -14,4 +14,6 @@ class SakoEngine {
 
   static void quit();
 
+  static void handleEvents();
+
 };

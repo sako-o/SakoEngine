@@ -37,3 +37,32 @@ void SakoEngine::quit() {
   SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_VIDEO);
   SDL_QuitSubSystem(SDL_InitFlags::SDL_INIT_AUDIO);
 }
+
+void SakoEngine::handleEvents() {
+
+    bool running = true;
+
+    while (running)
+    {
+      // set the event variable
+      SDL_Event event;
+
+      // event handling
+      // maybe move this into a function?
+      while (SDL_PollEvent(&event))
+      {
+        switch (event.type)
+        {
+        case SDL_EventType::SDL_EVENT_QUIT:
+          running = false;
+	case SDL_EventType::SDL_EVENT_KEY_DOWN:
+	  // keypress event 
+	  // this should differenciate between them
+	  if (event.key.keysym.sym == SDL_KeyCode::SDLK_q)
+	    running = false;
+	default:
+	  break;
+        };
+      };
+    }
+}
