@@ -1,6 +1,7 @@
 #include "window.h"
 #include "SDL_error.h"
 #include "SDL_log.h"
+#include "SDL_video.h"
 #include <SDL.h>
 #include <exception>
 #include <stdexcept>
@@ -9,6 +10,11 @@
 // this has everything needed (hopefully)
 Window::Window(const std::string &title, int width, int height,
                    SDL_WindowFlags flags, SDL_RendererFlags renderer_flags) {
+
+  // TODO Add more handling to this to make sure we don't accidentally change the resolution?
+  // bool fullscreen = false;
+  // if (fullscreen)
+  //   flags = SDL_WINDOW_FULLSCREEN;
 
   // make the window with the needed things
     SDL_Window *m_window =
