@@ -32,6 +32,6 @@ endif()
 #     )
 
 # libraries
-add_subdirectory(thirdparty/)
+add_subdirectory(third_party/)
 # engine
 add_subdirectory(Engine/)
