@@ -29,7 +29,7 @@ int main()
         glfwPollEvents();
     }
 
-    std::cout << extensionCount << "goodbye\n";
+    std::cout << "goodbye\n";
 
     glfwDestroyWindow(window);
 
