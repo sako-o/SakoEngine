@@ -1,39 +1,67 @@
+// graphiks
+#include <vulkan/vulkan_core.h>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
-
 #include <iostream>
+// exceptions are still not in std?!?!?!?
+#include <stdexcept>
+#include <cstdlib>
 
-int main()
-{
-  // https://vulkan-tutorial.com/Development_environment#page_GLFW
-    glfwInit();
+// https://vulkan-tutorial.com/en/Drawing_a_triangle/Setup/Instance
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Hello Vulkan!", nullptr, nullptr);
-
-    uint32_t extensionCount = 0;
-    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-
-    std::cout << extensionCount << " extensions supported\n";
-
-    glm::mat4 matrix;
-    glm::vec4 vec;
-    auto test = matrix * vec;
-
-    while(!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
+// maybe move this into seperate files lol
+class sakoEngine {
+public:
+    void run() {
+        initWindow();
+        initVulkan();
+        mainLoop();
+        cleanup();
     }
 
-    std::cout << "goodbye\n";
+private:
+  VkInstance vk_instance;
+  GLFWwindow* window;
 
-    glfwDestroyWindow(window);
+  void initWindow() {
+      // init
+      glfwInit();
 
-    glfwTerminate();
+      // create window without OpenGL Context
+      glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+      // disable resizing
+      glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    return 0;
+      window = glfwCreateWindow(800, 600, "SakoEngine" , nullptr, nullptr);
+    }
+
+    void initVulkan() {
+    }
+
+    void mainLoop() {
+      while (!glfwWindowShouldClose(window)) {
+	glfwPollEvents();
+      }
+
+    }
+
+    void cleanup() {
+      glfwDestroyWindow(window);
+
+      glfwTerminate();
+    }
+};
+
+int main() {
+    sakoEngine app;
+
+    try {
+        app.run();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
