@@ -5,63 +5,61 @@
 
 #include <iostream>
 // exceptions are still not in std?!?!?!?
-#include <stdexcept>
 #include <cstdlib>
+#include <stdexcept>
 
 // https://vulkan-tutorial.com/en/Drawing_a_triangle/Setup/Instance
 
 // maybe move this into seperate files lol
 class sakoEngine {
 public:
-    void run() {
-        initWindow();
-        initVulkan();
-        mainLoop();
-        cleanup();
-    }
+  void run() {
+    initWindow();
+    initVulkan();
+    mainLoop();
+    cleanup();
+  }
 
 private:
   VkInstance vk_instance;
-  GLFWwindow* window;
+  GLFWwindow *window;
 
   void initWindow() {
-      // init
-      glfwInit();
+    // init
+    glfwInit();
 
-      // create window without OpenGL Context
-      glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-      // disable resizing
-      glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    // create window without OpenGL Context
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    // disable resizing
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-      window = glfwCreateWindow(800, 600, "SakoEngine" , nullptr, nullptr);
+    window = glfwCreateWindow(800, 600, "SakoEngine", nullptr, nullptr);
+  }
+
+  void initVulkan() {}
+
+  void mainLoop() {
+    while (!glfwWindowShouldClose(window)) {
+      glfwPollEvents();
     }
+  }
 
-    void initVulkan() {
-    }
+  void cleanup() {
+    glfwDestroyWindow(window);
 
-    void mainLoop() {
-      while (!glfwWindowShouldClose(window)) {
-	glfwPollEvents();
-      }
-
-    }
-
-    void cleanup() {
-      glfwDestroyWindow(window);
-
-      glfwTerminate();
-    }
+    glfwTerminate();
+  }
 };
 
 int main() {
-    sakoEngine app;
+  sakoEngine app;
 
-    try {
-        app.run();
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+  try {
+    app.run();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return EXIT_FAILURE;
+  }
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
