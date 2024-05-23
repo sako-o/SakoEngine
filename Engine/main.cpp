@@ -8,7 +8,8 @@
 #include <cstdlib>
 #include <stdexcept>
 
-// https://vulkan-tutorial.com/en/Drawing_a_triangle/Setup/Instance
+// https://vulkan-tutorial.com/en/Drawing_a_triangle/Setup/Validation_layers
+
 
 // maybe move this into seperate files lol
 class sakoEngine {
@@ -18,6 +19,7 @@ public:
     initVulkan();
     mainLoop();
     cleanup();
+    createInstance();
   }
 
 private:
@@ -36,7 +38,56 @@ private:
     window = glfwCreateWindow(800, 600, "SakoEngine", nullptr, nullptr);
   }
 
-  void initVulkan() {}
+  void initVulkan() { createInstance(); }
+
+  void createInstance() {
+    // application info
+    VkApplicationInfo appInfo{};
+
+    // structure type of appInfo
+    appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    // application name
+    appInfo.pApplicationName = "SakoEngine";
+    // application version
+    appInfo.applicationVersion = VK_MAKE_VERSION(0, 1, 0);
+    // engine name
+    appInfo.pEngineName = "SakoEngine";
+    // engine version
+    appInfo.engineVersion = VK_MAKE_VERSION(0, 1, 0);
+    // vulkan api version (TODO::(sako) check up on newer API docs?)
+    appInfo.apiVersion = VK_API_VERSION_1_0;
+
+    // vulkan instance creation info
+    VkInstanceCreateInfo createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+    createInfo.pApplicationInfo = &appInfo;
+
+    // make a unit32 glfw extensions count var
+    uint32_t glfwExtensionCount = 0;
+    // const for glfwExtensions as a string (wtf char!!!!!!!!!!)
+    const char **glfwExtensions;
+
+    // set glfw extensions
+    glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+
+    // set enabled extensions count according to GLFW
+    createInfo.enabledExtensionCount = glfwExtensionCount;
+
+    // same thing but with names
+    createInfo.ppEnabledExtensionNames = glfwExtensions;
+
+    // this is for validation layers
+    createInfo.enabledLayerCount = 0;
+
+    // make the result variable
+    // creation info, validation, then the instance
+    VkResult vk_result = vkCreateInstance(&createInfo, nullptr, &vk_instance);
+
+    // stop if it has failed
+    if (vkCreateInstance(&createInfo, nullptr, &vk_instance) != VK_SUCCESS) {
+      throw std::runtime_error("failed to create instance!");
+    }
+  }
 
   void mainLoop() {
     while (!glfwWindowShouldClose(window)) {
@@ -45,8 +96,13 @@ private:
   }
 
   void cleanup() {
+    // destroy vkInstance
+    vkDestroyInstance(vk_instance, nullptr);
+
+    // destroy glfw window
     glfwDestroyWindow(window);
 
+    // terminate
     glfwTerminate();
   }
 };
