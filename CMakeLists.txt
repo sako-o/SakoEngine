@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 project(SakoEngine VERSION 0.0.1)
 
 # CXX standard
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 # cause we need the dll and stuff :D
@@ -16,12 +16,14 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # this only works with Makefiles though...
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if (WIN32)
-  message("we need to define the module path on windows for some reason.")
-  set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
-else()
-  message("using default Module path")
-endif()
+# if (WIN32)
+#   message("we need to define the module path on windows for some reason.")
+#   set(CMAKE_MODULE_PATH "C:/Program Files/CMake/share/cmake-3.26/Modules")
+# else()
+#   message("using default Module path")
+# endif()
+
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 # thing
 # add_custom_target(
@@ -32,6 +34,6 @@ endif()
 #     )
 
 # libraries
-add_subdirectory(lib/)
+add_subdirectory(third_party/)
 # engine
 add_subdirectory(Engine/)
