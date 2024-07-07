@@ -1,7 +1,7 @@
 {
   description = "SakoEngine flake";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
   };
   outputs = {nixpkgs, ...}: let
     system = "x86_64-linux";
@@ -20,7 +20,7 @@
       vulkan-validation-layers
     ];
   in {
-    # TODO:: Pre commit hooks that format everything
+    # TODO:: Pre commit hooks
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         nativeBuildInputs
