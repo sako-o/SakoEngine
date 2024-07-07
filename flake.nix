@@ -18,6 +18,8 @@
       vulkan-headers
       vulkan-loader
       vulkan-validation-layers
+      glfw3
+      glm
     ];
   in {
     # TODO:: Pre commit hooks
