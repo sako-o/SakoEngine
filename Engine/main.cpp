@@ -1,10 +1,11 @@
-#include <vulkan/vulkan.h>
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
 
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
 
-// page 41 of guide
+// page 43 of guide
 
 class SakoEngine {
 public:
@@ -16,6 +17,7 @@ public:
 
 private:
   void initVulkan() {}
+  void initWindow() {}
   void mainLoop() {}
   void cleanup() {}
 };
@@ -26,7 +28,6 @@ int main() {
   try {
     engine.run();
   } catch (const std::exception &e) {
-  std:
     std::cerr << e.what() << std::endl;
     return EXIT_FAILURE;
   }
