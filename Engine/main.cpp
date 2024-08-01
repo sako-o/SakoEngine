@@ -5,7 +5,7 @@
 #include <iostream>
 #include <stdexcept>
 
-// page 43 of guide
+// page 41 of guide
 
 class SakoEngine {
 public:
