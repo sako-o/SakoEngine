@@ -1,37 +1,61 @@
-#include <SDL_events.h>
-#include <SDL_log.h>
-#include <SDL_render.h>
-#include <SDL_video.h>
-#include <exception>
+#include <cstdint>
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
+#include <cstdlib>
 #include <iostream>
-#include <SDL.h>
-#include "SDL_oldnames.h"
-#include "window.h"
-#include "sakoengine.h"
+#include <stdexcept>
 
-int main()
-{
+// page 41 of guide
 
-  // init
-  SakoEngine::init();
+const uint32_t w_width = 800;
+const uint32_t w_height = 600;
 
-  // todo:: make user customiztable somehow
-  // predefined height
-  int width = 800;
-  int height = 800;
+class SakoEngine {
+public:
+  void run() {
+    initWindow();
+    initVulkan();
+    mainLoop();
+    cleanup();
+  }
 
-  // create window
+private:
+  GLFWwindow *window;
 
-  Window window("SakoEngine", 800, 800, SDL_WINDOW_OPENGL, SDL_RENDERER_ACCELERATED);
+  void initVulkan() {}
+  void initWindow() {
+    glfwInit();
 
-  // game loop begins here
+    // window hints (disable api for manually adding vulkan)
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    // disable resizeing windows
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-  {
+    window =
+        glfwCreateWindow(w_width, w_height, "SakoEngine", nullptr, nullptr);
+  }
+  void mainLoop() {
+    while (!glfwWindowShouldClose(window)) {
+      glfwPollEvents();
+    }
+  }
+  void cleanup() {
+    glfwDestroyWindow(window);
 
-    SakoEngine::handleEvents();
+    glfwTerminate();
+  }
+};
 
-    // cleanup
-    SakoEngine::quit();
-    return 0;
-  };
+int main() {
+  SakoEngine engine;
+
+  try {
+    engine.run();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+    return EXIT_FAILURE;
+  }
+
+  return EXIT_SUCCESS;
 }
