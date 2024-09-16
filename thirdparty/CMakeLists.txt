@@ -1,5 +1,6 @@
 find_package(glfw3 REQUIRED)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/glad/include)
 # Path to glad directory
 set(GLAD_SOURCES_DIR "${PROJECT_SOURCE_DIR}/thirdparty/glad/")
 # Path to glad cmake files
