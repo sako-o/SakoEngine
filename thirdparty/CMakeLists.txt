@@ -7,7 +7,7 @@ set(GLAD_SOURCES_DIR "${PROJECT_SOURCE_DIR}/thirdparty/glad/")
 add_subdirectory("${GLAD_SOURCES_DIR}/cmake" glad_cmake)
 
 # Specify glad settings
-glad_add_library(glad_gl_core REPRODUCIBLE API gl:core=4.6)
+glad_add_library(glad_gl_core REPRODUCIBLE MX API gl:core=4.6)
 
 add_library(third_party INTERFACE)
 target_link_libraries(third_party INTERFACE glfw glad_gl_core)
