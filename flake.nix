@@ -8,7 +8,7 @@
       inherit (nixpkgs) lib;
       inherit (builtins) attrValues;
       eachSystem = f:
-        lib.genAttrs [ "x86_64-linux" "aarch64-linux" ]
+        lib.genAttrs [ "x86_64-linux" ]
         (system: f nixpkgs.legacyPackages.${system});
     in {
 
@@ -19,7 +19,7 @@
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
-         packages = attrValues { inherit (pkgs) cmake gcc glfw; };
+          packages = attrValues { inherit (pkgs) cmake gcc glfw; };
         };
       });
 
