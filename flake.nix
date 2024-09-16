@@ -19,7 +19,7 @@
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
-          packages = attrValues { inherit (pkgs) cmake gcc glfw; };
+          packages = attrValues { inherit (pkgs) cmake gcc glfw; inherit (pkgs.python312Packages) jinja2;};
         };
       });
 
