@@ -209,31 +209,30 @@ int main() {
 
   // Initialize OpenGL
   if (gl_Init()) {
-    // *** Add message pump code here ***
+
+    // Event Handling
+    SDL_Event Event;
+    bool running = true;
+    while (running) {
+      // Poll SDL for buffered events
+      while (SDL_PollEvent(&Event)) {
+        if (Event.type == SDL_QUIT)
+          running = false;
+        else if (Event.type == SDL_KEYDOWN) {
+          if (Event.key.keysym.sym == SDLK_ESCAPE)
+            running = false;
+        }
+      }
+
+      // Render the scene
+      gl_Render();
+
+      // Swap the back-buffer and present it
+      SDL_GL_SwapWindow(window);
+    }
 
     // Delete any created GL resources
     gl_Quit();
-  }
-
-  // Event Handling
-  SDL_Event Event;
-  bool running = true;
-  while (running) {
-    // Poll SDL for buffered events
-    while (SDL_PollEvent(&Event)) {
-      if (Event.type == SDL_QUIT)
-        running = false;
-      else if (Event.type == SDL_KEYDOWN) {
-        if (Event.key.keysym.sym == SDLK_ESCAPE)
-          running = false;
-      }
-    }
-
-    // Render the scene
-    gl_Render();
-
-    // Swap the back-buffer and present it
-    SDL_GL_SwapWindow(window);
   }
 
   // cleanup
