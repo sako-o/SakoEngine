@@ -129,9 +129,16 @@ SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
 // BEGIN OPENGL SETUp
 
 // OpenGL setup
-GLuint gl_VAO;        // Vertex Array Object
-GLuint gl_VBO;        // Vertex Buffer Object
-GLuint gl_SakoEngine; // Shader program ID
+GLuint gl_VAO[2];           // Vertex Array Object
+GLuint gl_VBO[2];           // Vertex Buffer Object
+GLuint gl_IBO[2];           // IBO
+GLsizei gl_iSphereElements; // sphere elements???
+GLuint gl_SakoEngine;       // Shader program ID
+
+// transformrers
+// transformations
+glm::mat4 g_m4Transform[5];
+GLuint g_uiTransformUBO[5];
 
 // load just one shader :)
 
@@ -181,6 +188,25 @@ bool GL_LoadShaders(GLuint &uiShader, GLuint uiVertexShader,
   }
   return true;
 }
+
+// declare window variables
+int windowWidth = 800;
+int windowHeight = 600;
+bool windowIsFullscreen = false;
+
+struct LocalCameraData {
+  float m_fAngleX;
+  float m_fAngleY;
+  glm::vec3 m_v3Position;
+  glm::vec3 m_v3Direction;
+  glm::vec3 m_v3Right;
+  float m_fFOV;
+  float m_fAspect;
+  float m_fNear;
+  float m_fFar;
+};
+LocalCameraData g_CameraData;
+GLuint g_uiCameraUBO;
 
 bool gl_Init() {
 
@@ -235,15 +261,51 @@ bool gl_Init() {
   glDeleteShader(uiFragmentShader);
 
   // Create a Vertex Array Object
-  glGenVertexArrays(1, &gl_VAO);
-  glBindVertexArray(gl_VAO);
+  glGenVertexArrays(2, &gl_VAO[0]);
+  glBindVertexArray(gl_VAO[0]);
 
   // Create VBO data
   GLfloat fVertexData[] = {-0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f};
 
+  // Initialise camera data
+  g_CameraData.m_fAngleX = (float)M_PI;
+  g_CameraData.m_fAngleY = 0.0f;
+  g_CameraData.m_v3Position = glm::vec3(0.0f, 0.0f, 12.0f);
+  g_CameraData.m_v3Direction = glm::vec3(0.0f, 0.0f, -1.0f);
+  g_CameraData.m_v3Right = glm::vec3(1.0f, 0.0f, 0.0f);
+
+  // Initialise camera projection values
+  g_CameraData.m_fFOV = glm::radians(45.0f);
+  g_CameraData.m_fAspect = (float)windowWidth / (float)windowHeight;
+  g_CameraData.m_fNear = 0.1f;
+  g_CameraData.m_fFar = 100.0f;
+
+  // Create updated camera View matrix
+  glm::mat4 m4View =
+      lookAt(g_CameraData.m_v3Position,
+             g_CameraData.m_v3Position + g_CameraData.m_v3Direction,
+             cross(g_CameraData.m_v3Right, g_CameraData.m_v3Direction));
+
+  // Create updated camera projection matrix
+  glm::mat4 m4Projection =
+      glm::perspective(g_CameraData.m_fFOV, g_CameraData.m_fAspect,
+                       g_CameraData.m_fNear, g_CameraData.m_fFar);
+
+  // Create updated ViewProjection matrix
+  glm::mat4 m4ViewProjection = m4Projection * m4View;
+
+  // Update the camera buffer
+  glBindBuffer(GL_UNIFORM_BUFFER, g_uiCameraUBO);
+  glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), &m4ViewProjection,
+               GL_DYNAMIC_DRAW);
+
+  // Bind camera UBO
+  glBindBufferBase(GL_UNIFORM_BUFFER, 1, g_uiCameraUBO);
+
   // Create Vertex Buffer Object
-  glGenBuffers(1, &gl_VBO);
-  glBindBuffer(GL_ARRAY_BUFFER, gl_VBO);
+  glGenBuffers(2, &gl_VBO[0]);
+  glGenBuffers(2, &gl_IBO[0]);
+  glBindBuffer(GL_ARRAY_BUFFER, gl_VBO[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(fVertexData), fVertexData,
                GL_STATIC_DRAW);
 
@@ -257,32 +319,11 @@ bool gl_Init() {
   return true;
 }
 
-void gl_Render() {
-  // Clear render outputand buffer
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  // Specify VAO to use
-  glBindVertexArray(gl_VAO);
-
-  // Draw the triangle
-  glDrawArrays(GL_TRIANGLES, 0, 3);
-}
-void gl_Quit() {
-  // Release the shader program
-  glDeleteProgram(gl_SakoEngine);
-
-  // Delete VBO and VAO
-  glDeleteBuffers(1, &gl_VBO);
-  glDeleteVertexArrays(1, &gl_VAO);
-}
-
-// END OPENGL SETUP
-
 // create geometry to render :)
 
 struct CustomVertex {
   glm::vec3 v3Position;
 };
-
 // this makes a cube
 
 GLsizei GL_GenerateCube(GLuint gl_VBO, GLuint gl_IBO) {
@@ -429,6 +470,80 @@ GLsizei GL_GenerateSphere(uint32_t uiTessU, uint32_t uiTessV, GLuint gl_VBO,
   glEnableVertexAttribArray(0);
   return uiNumIndices;
 }
+
+void gl_Render() {
+
+  // Create initial model transforms
+  g_m4Transform[0] = glm::mat4(1.0f); // Identity matrix
+  g_m4Transform[1] = translate(glm::mat4(1.0f), glm::vec3(-3.0f, 0.0f, 0.0f));
+  g_m4Transform[2] = translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.0f, 0.0f));
+  g_m4Transform[3] = translate(glm::mat4(1.0f), glm::vec3(3.0f, 0.0f, 0.0f));
+  g_m4Transform[4] = translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.0f, 0.0f));
+
+  // Create transform UBOs
+  glGenBuffers(5, &g_uiTransformUBO[0]);
+
+  // Initialise the transform buffers
+  for (int i = 0; i < 5; i++) {
+    glBindBuffer(GL_UNIFORM_BUFFER, g_uiTransformUBO[i]);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), &g_m4Transform[i],
+                 GL_STATIC_DRAW);
+  }
+
+  // Clear render outputand buffer
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  // Specify VAO to use
+  glBindVertexArray(gl_VAO[0]);
+
+  // Bind the Cube VAO
+  glBindVertexArray(gl_VAO[0]);
+
+  // Bind the Transform UBO
+  glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[0]);
+
+  // Draw the Cube
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+  // Create Cube VBO and IBO data
+  GL_GenerateCube(gl_VBO[0], gl_IBO[0]);
+
+  // Bind the Sphere VAO
+  glBindVertexArray(gl_VAO[1]);
+
+  // Render each sphere
+  for (int i = 1; i < 5; i++) {
+    // Bind the Transform UBO
+    glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[i]);
+
+    // Draw the Sphere
+    glDrawElements(GL_TRIANGLES, gl_iSphereElements, GL_UNSIGNED_INT, 0);
+  }
+
+  // Create Sphere VBO and IBO data
+  gl_iSphereElements = GL_GenerateSphere(12, 6, gl_VBO[1], gl_IBO[1]);
+
+  // Draw the triangle
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+void gl_Quit() {
+  // Release the shader program
+  glDeleteProgram(gl_SakoEngine);
+
+  // Delete VBO and VAO
+  glDeleteBuffers(1, &gl_VBO[0]);
+  glDeleteVertexArrays(1, &gl_VAO[0]);
+  // Delete VBOs/IBOs and VAOs
+  glDeleteBuffers(2, &gl_VBO[0]);
+  glDeleteBuffers(2, &gl_IBO[0]);
+  glDeleteVertexArrays(2, &gl_VAO[0]);
+
+  // Delete transform and camera UBOs
+  glDeleteBuffers(5, &g_uiTransformUBO[0]);
+  glDeleteBuffers(1, &g_uiCameraUBO);
+}
+
+// END OPENGL SETUP
+
 int main() {
 
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -447,11 +562,6 @@ int main() {
   // Turn on double buffering with a 24bit Z buffer
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-  // Declare window variables
-  int windowWidth = 800;
-  int windowHeight = 600;
-  bool windowIsFullscreen = false;
 
   // TODO Customizable window size probably
   // //Get desktop resolution
