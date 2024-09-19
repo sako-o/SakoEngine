@@ -19,7 +19,7 @@
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
-          packages = attrValues { inherit (pkgs) cmake gcc pkg-config SDL2 glew; };
+          packages = attrValues { inherit (pkgs) cmake gcc pkg-config SDL2 glew glm; };
         };
       });
 
