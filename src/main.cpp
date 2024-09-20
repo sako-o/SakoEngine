@@ -501,14 +501,17 @@ void gl_Render() {
   // Bind the Transform UBO
   glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[0]);
 
-  // Draw the Cube
-  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
   // Create Cube VBO and IBO data
   GL_GenerateCube(gl_VBO[0], gl_IBO[0]);
 
+  // Draw the Cube
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
   // Bind the Sphere VAO
   glBindVertexArray(gl_VAO[1]);
+
+  // Create Sphere VBO and IBO data
+  gl_iSphereElements = GL_GenerateSphere(12, 6, gl_VBO[1], gl_IBO[1]);
 
   // Render each sphere
   for (int i = 1; i < 5; i++) {
@@ -518,9 +521,6 @@ void gl_Render() {
     // Draw the Sphere
     glDrawElements(GL_TRIANGLES, gl_iSphereElements, GL_UNSIGNED_INT, 0);
   }
-
-  // Create Sphere VBO and IBO data
-  gl_iSphereElements = GL_GenerateSphere(12, 6, gl_VBO[1], gl_IBO[1]);
 
   // Draw the triangle
   glDrawArrays(GL_TRIANGLES, 0, 3);
