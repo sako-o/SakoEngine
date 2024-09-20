@@ -208,122 +208,12 @@ struct LocalCameraData {
 LocalCameraData g_CameraData;
 GLuint g_uiCameraUBO;
 
-bool gl_Init() {
-
-  // Initialize GLEW
-  glewExperimental = GL_TRUE; // Allow experimental extensions
-  GLenum glewError = glewInit();
-  if (glewError != GLEW_OK) {
-    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
-                    "Failed to initalize GLEW!: %s\n",
-                    glewGetErrorString(glewError));
-    return false;
-  }
-
-  // Set up initial GL attributes
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  glCullFace(GL_BACK);
-  glEnable(GL_CULL_FACE);
-  glEnable(GL_DEPTH_TEST);
-  glDisable(GL_STENCIL_TEST);
-
-  // Create vertex shader source
-  const GLchar p_cVertexShaderSource[] = {"#version 430 core\n \
-    layout(location = 0) in vec2 v2VertexPos2D;\n \
-    void main() \n \
-    { gl_Position = vec4(v2VertexPos2D, 0.0f, 1.0f); }"};
-
-  // Create vertex shader
-  GLuint uiVertexShader;
-  if (!GL_LoadShader(uiVertexShader, GL_VERTEX_SHADER, p_cVertexShaderSource))
-    return false;
-
-  // Create fragment shader source
-  const GLchar p_cFragmentShaderSource[] = {"#version 430 core\n \
-    out vec3 v3FragOutput;\n \
-    void main() \n \
-    {\n \
-        v3FragOutput = vec3(1.0f, 1.0f, 1.0f);\n \
-    }"};
-
-  // Create fragment shader
-  GLuint uiFragmentShader;
-  if (!GL_LoadShader(uiFragmentShader, GL_FRAGMENT_SHADER,
-                     p_cFragmentShaderSource))
-    return false;
-
-  // Create program
-  if (!GL_LoadShaders(gl_SakoEngine, uiVertexShader, uiFragmentShader))
-    return false;
-
-  // Clean up unneeded shaders
-  glDeleteShader(uiVertexShader);
-  glDeleteShader(uiFragmentShader);
-
-  // Create a Vertex Array Object
-  glGenVertexArrays(2, &gl_VAO[0]);
-  glBindVertexArray(gl_VAO[0]);
-
-  // Create VBO data
-  GLfloat fVertexData[] = {-0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f};
-
-  // Initialise camera data
-  g_CameraData.m_fAngleX = (float)M_PI;
-  g_CameraData.m_fAngleY = 0.0f;
-  g_CameraData.m_v3Position = glm::vec3(0.0f, 0.0f, 12.0f);
-  g_CameraData.m_v3Direction = glm::vec3(0.0f, 0.0f, -1.0f);
-  g_CameraData.m_v3Right = glm::vec3(1.0f, 0.0f, 0.0f);
-
-  // Initialise camera projection values
-  g_CameraData.m_fFOV = glm::radians(45.0f);
-  g_CameraData.m_fAspect = (float)windowWidth / (float)windowHeight;
-  g_CameraData.m_fNear = 0.1f;
-  g_CameraData.m_fFar = 100.0f;
-
-  // Create updated camera View matrix
-  glm::mat4 m4View =
-      lookAt(g_CameraData.m_v3Position,
-             g_CameraData.m_v3Position + g_CameraData.m_v3Direction,
-             cross(g_CameraData.m_v3Right, g_CameraData.m_v3Direction));
-
-  // Create updated camera projection matrix
-  glm::mat4 m4Projection =
-      glm::perspective(g_CameraData.m_fFOV, g_CameraData.m_fAspect,
-                       g_CameraData.m_fNear, g_CameraData.m_fFar);
-
-  // Create updated ViewProjection matrix
-  glm::mat4 m4ViewProjection = m4Projection * m4View;
-
-  // Update the camera buffer
-  glBindBuffer(GL_UNIFORM_BUFFER, g_uiCameraUBO);
-  glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), &m4ViewProjection,
-               GL_DYNAMIC_DRAW);
-
-  // Bind camera UBO
-  glBindBufferBase(GL_UNIFORM_BUFFER, 1, g_uiCameraUBO);
-
-  // Create Vertex Buffer Object
-  glGenBuffers(2, &gl_VBO[0]);
-  glGenBuffers(2, &gl_IBO[0]);
-  glBindBuffer(GL_ARRAY_BUFFER, gl_VBO[0]);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(fVertexData), fVertexData,
-               GL_STATIC_DRAW);
-
-  // Specify location of data within buffer
-  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
-                        (const GLvoid *)0);
-  glEnableVertexAttribArray(0);
-
-  glUseProgram(gl_SakoEngine);
-
-  return true;
-}
-
 // create geometry to render :)
 
 struct CustomVertex {
   glm::vec3 v3Position;
 };
+
 // this makes a cube
 
 GLsizei GL_GenerateCube(GLuint gl_VBO, GLuint gl_IBO) {
@@ -471,7 +361,64 @@ GLsizei GL_GenerateSphere(uint32_t uiTessU, uint32_t uiTessV, GLuint gl_VBO,
   return uiNumIndices;
 }
 
-void gl_Render() {
+bool gl_Init() {
+
+  // Initialize GLEW
+  glewExperimental = GL_TRUE; // Allow experimental extensions
+  GLenum glewError = glewInit();
+  if (glewError != GLEW_OK) {
+    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
+                    "Failed to initalize GLEW!: %s\n",
+                    glewGetErrorString(glewError));
+    return false;
+  }
+
+  // Set up initial GL attributes
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glCullFace(GL_BACK);
+  glEnable(GL_CULL_FACE);
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_STENCIL_TEST);
+
+  // Create vertex shader source
+  const GLchar p_cVertexShaderSource[] = {"#version 430 core\n \
+    layout(location = 0) in vec2 v2VertexPos2D;\n \
+    void main() \n \
+    { gl_Position = vec4(v2VertexPos2D, 0.0f, 1.0f); }"};
+
+  // Create vertex shader
+  GLuint uiVertexShader;
+  if (!GL_LoadShader(uiVertexShader, GL_VERTEX_SHADER, p_cVertexShaderSource))
+    return false;
+
+  // Create fragment shader source
+  const GLchar p_cFragmentShaderSource[] = {"#version 430 core\n \
+    out vec3 v3FragOutput;\n \
+    void main() \n \
+    {\n \
+        v3FragOutput = vec3(1.0f, 1.0f, 1.0f);\n \
+    }"};
+
+  // Create fragment shader
+  GLuint uiFragmentShader;
+  if (!GL_LoadShader(uiFragmentShader, GL_FRAGMENT_SHADER,
+                     p_cFragmentShaderSource))
+    return false;
+
+  // Create program
+  if (!GL_LoadShaders(gl_SakoEngine, uiVertexShader, uiFragmentShader))
+    return false;
+
+  // Clean up unneeded shaders
+  glDeleteShader(uiVertexShader);
+  glDeleteShader(uiFragmentShader);
+
+  // Create a Vertex Array Object
+  glGenVertexArrays(2, &gl_VAO[0]);
+  glBindVertexArray(gl_VAO[0]);
+
+  // Create VBO data
+  GLfloat fVertexData[] = {-0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f};
 
   // Create initial model transforms
   g_m4Transform[0] = glm::mat4(1.0f); // Identity matrix
@@ -483,6 +430,9 @@ void gl_Render() {
   // Create transform UBOs
   glGenBuffers(5, &g_uiTransformUBO[0]);
 
+  // Bind the Transform UBO
+  glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[0]);
+
   // Initialise the transform buffers
   for (int i = 0; i < 5; i++) {
     glBindBuffer(GL_UNIFORM_BUFFER, g_uiTransformUBO[i]);
@@ -490,28 +440,79 @@ void gl_Render() {
                  GL_STATIC_DRAW);
   }
 
-  // Clear render outputand buffer
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  // Specify VAO to use
-  glBindVertexArray(gl_VAO[0]);
-
   // Bind the Cube VAO
   glBindVertexArray(gl_VAO[0]);
 
-  // Bind the Transform UBO
-  glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[0]);
-
   // Create Cube VBO and IBO data
   GL_GenerateCube(gl_VBO[0], gl_IBO[0]);
-
-  // Draw the Cube
-  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
   // Bind the Sphere VAO
   glBindVertexArray(gl_VAO[1]);
 
   // Create Sphere VBO and IBO data
   gl_iSphereElements = GL_GenerateSphere(12, 6, gl_VBO[1], gl_IBO[1]);
+
+  // Initialise camera data
+  g_CameraData.m_fAngleX = (float)M_PI;
+  g_CameraData.m_fAngleY = 0.0f;
+  g_CameraData.m_v3Position = glm::vec3(0.0f, 0.0f, 12.0f);
+  g_CameraData.m_v3Direction = glm::vec3(0.0f, 0.0f, -1.0f);
+  g_CameraData.m_v3Right = glm::vec3(1.0f, 0.0f, 0.0f);
+
+  // Initialise camera projection values
+  g_CameraData.m_fFOV = glm::radians(45.0f);
+  g_CameraData.m_fAspect = (float)windowWidth / (float)windowHeight;
+  g_CameraData.m_fNear = 0.1f;
+  g_CameraData.m_fFar = 100.0f;
+
+  // Create updated camera View matrix
+  glm::mat4 m4View =
+      lookAt(g_CameraData.m_v3Position,
+             g_CameraData.m_v3Position + g_CameraData.m_v3Direction,
+             cross(g_CameraData.m_v3Right, g_CameraData.m_v3Direction));
+
+  // Create updated camera projection matrix
+  glm::mat4 m4Projection =
+      glm::perspective(g_CameraData.m_fFOV, g_CameraData.m_fAspect,
+                       g_CameraData.m_fNear, g_CameraData.m_fFar);
+
+  // Create updated ViewProjection matrix
+  glm::mat4 m4ViewProjection = m4Projection * m4View;
+
+  // Update the camera buffer
+  glBindBuffer(GL_UNIFORM_BUFFER, g_uiCameraUBO);
+  glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), &m4ViewProjection,
+               GL_DYNAMIC_DRAW);
+
+  // Bind camera UBO
+  glBindBufferBase(GL_UNIFORM_BUFFER, 1, g_uiCameraUBO);
+
+  // Create Vertex Buffer Object
+  glGenBuffers(2, &gl_VBO[0]);
+  glGenBuffers(2, &gl_IBO[0]);
+  glBindBuffer(GL_ARRAY_BUFFER, gl_VBO[0]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(fVertexData), fVertexData,
+               GL_STATIC_DRAW);
+
+  // Specify location of data within buffer
+  glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+                        (const GLvoid *)0);
+  glEnableVertexAttribArray(0);
+
+  glUseProgram(gl_SakoEngine);
+
+  return true;
+}
+
+void gl_Render() {
+
+  // Clear render outputand buffer
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  // Specify VAO to use
+  glBindVertexArray(gl_VAO[0]);
+
+  // Draw the Cube
+  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
   // Render each sphere
   for (int i = 1; i < 5; i++) {
