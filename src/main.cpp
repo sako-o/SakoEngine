@@ -117,13 +117,6 @@ void GLDebug_Init() {
                         GL_FALSE); // Disable notifications
 }
 
-// options thingy
-#ifdef _DEBUG
-// Initialise debug call-back
-GLDebug_Init();
-SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
-#endif
-
 // END GL_DEBUG
 
 // BEGIN OPENGL SETUp
@@ -362,6 +355,13 @@ GLsizei GL_GenerateSphere(uint32_t uiTessU, uint32_t uiTessV, GLuint gl_VBO,
 }
 
 bool gl_Init() {
+
+  // options thingy
+#ifdef _DEBUG
+  // Initialise debug call-back
+  GLDebug_Init();
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
+#endif
 
   // Initialize GLEW
   glewExperimental = GL_TRUE; // Allow experimental extensions
