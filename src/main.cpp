@@ -413,9 +413,16 @@ bool gl_Init() {
   glDeleteShader(uiVertexShader);
   glDeleteShader(uiFragmentShader);
 
+  // Specify program to use
+  glUseProgram(gl_SakoEngine);
+
   // Create a Vertex Array Object
   glGenVertexArrays(2, &gl_VAO[0]);
   glBindVertexArray(gl_VAO[0]);
+
+  // Create Vertex Buffer Object
+  glGenBuffers(2, &gl_VBO[0]);
+  glGenBuffers(2, &gl_IBO[0]);
 
   // Create VBO data
   GLfloat fVertexData[] = {-0.5f, -0.5f, 0.5f, -0.5f, 0.0f, 0.5f};
@@ -487,9 +494,7 @@ bool gl_Init() {
   // Bind camera UBO
   glBindBufferBase(GL_UNIFORM_BUFFER, 1, g_uiCameraUBO);
 
-  // Create Vertex Buffer Object
-  glGenBuffers(2, &gl_VBO[0]);
-  glGenBuffers(2, &gl_IBO[0]);
+  // Bind Buffer to gl_VBO
   glBindBuffer(GL_ARRAY_BUFFER, gl_VBO[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(fVertexData), fVertexData,
                GL_STATIC_DRAW);
@@ -499,8 +504,6 @@ bool gl_Init() {
                         (const GLvoid *)0);
   glEnableVertexAttribArray(0);
 
-  glUseProgram(gl_SakoEngine);
-
   return true;
 }
 
@@ -508,11 +511,18 @@ void gl_Render() {
 
   // Clear render outputand buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  // Specify VAO to use
+
+  // Specify Cube VAO to use
   glBindVertexArray(gl_VAO[0]);
+
+  // Bind to the transform UBO
+  glBindBufferBase(GL_UNIFORM_BUFFER, 0, g_uiTransformUBO[0]);
 
   // Draw the Cube
   glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+  // Specify Sphere VAO
+  glBindVertexArray(gl_VAO[1]);
 
   // Render each sphere
   for (int i = 1; i < 5; i++) {
