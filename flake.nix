@@ -12,10 +12,11 @@
         (system: f nixpkgs.legacyPackages.${system});
     in {
 
-      # packages = eachSystem (pkgs: rec {
-      #   default = sakoEngine;
-      #   sakoEngine = pkgs.callPackage ./package.nix { };
-      # });
+      packages = eachSystem (pkgs: rec {
+        # default = sakoEngine;
+        # sakoEngine = pkgs.callPackage ./package.nix { };
+        SDL3 = pkgs.callPackage ./nix/sdl3.nix { };
+      });
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {

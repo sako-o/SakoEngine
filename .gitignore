@@ -8,6 +8,7 @@
 # for this repo
 build/
 build/*
+result
 
 #
 ## CMake
