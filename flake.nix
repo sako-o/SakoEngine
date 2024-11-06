@@ -21,7 +21,9 @@
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
           packages = attrValues {
-            inherit (pkgs) cmake gcc gdb pkg-config SDL2 glew glm;
+            inherit (pkgs)
+              cmake gcc gdb pkg-config SDL2 glew glm vulkan-headers
+              vulkan-loader vulkan-tools;
             inherit (self.packages."x86_64-linux") SDL3;
           };
         };
