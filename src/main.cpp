@@ -9,6 +9,9 @@
 #include <SDL3/SDL_surface.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
+#include <imgui.h>
+#include <imgui_impl_sdl3.h>
+#include <imgui_impl_vulkan.h>
 #include <iostream>
 #include <string>
 
@@ -60,6 +63,15 @@ int main() {
     return 1;
   };
 
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO &io = ImGui::GetIO();
+  (void)io;
+
+  ImGui::StyleColorsDark();
+
+  ImGui_ImplSDL3_InitForVulkan(sdl_window);
+
   while (running) {
     SDL_Event sdl_event;
     while (SDL_PollEvent(&sdl_event)) {
@@ -74,10 +86,25 @@ int main() {
         };
       };
     };
+
+    // make gui
+    // ImGui_ImplSDL3_NewFrame();
+    // ImGui_ImplVulkan_NewFrame();
+    ImGui_ImplSDL3_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::Begin("MyWindow");
+    ImGui::Checkbox("Boolean property", nullptr);
+    ImGui::End();
+
     SDL_BlitSurface(wires, nullptr, sdl_windowSurface, nullptr);
+    ImGui::Render();
     SDL_UpdateWindowSurface(sdl_window);
     SDL_Delay(10);
   };
+
+  ImGui_ImplSDL3_Shutdown();
+  ImGui::DestroyContext();
 
   SDL_DestroyWindow(sdl_window);
 
