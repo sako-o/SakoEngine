@@ -25,7 +25,7 @@
           inherit
             (pkgs)
             meson
-            gnumake
+            ninja
             gcc
             gdb
             pkg-config
