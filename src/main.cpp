@@ -68,6 +68,9 @@ int main() {
   ImGuiIO &io = ImGui::GetIO();
   (void)io;
 
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;   
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  
+
   ImGui::StyleColorsDark();
 
   // ImGui_ImplSDL3_InitForVulkan(sdl_window);
@@ -99,14 +102,15 @@ int main() {
 
     {
       ImGui::Begin("MyWindow");
-      // ImGui::Checkbox("Boolean property", nullptr);
-      ImGui::Text("Hawk tuah!");
+      ImGui::Checkbox("Running", &running);
+      ImGui::Text("Hi!");
       ImGui::End();
     }
-    SDL_BlitSurface(wires, nullptr, sdl_windowSurface, nullptr);
     ImGui::Render();
-    SDL_UpdateWindowSurface(sdl_window);
-    SDL_Delay(10);
+    SDL_RenderClear(sdl_renderer);
+    ImGui_ImplSDLRenderer3_RenderDrawData(ImGui::GetDrawData(), sdl_renderer);
+    SDL_RenderPresent(sdl_renderer);
+    // SDL_Delay(10);
   };
 
   ImGui_ImplSDLRenderer3_Shutdown();
