@@ -11,7 +11,7 @@
 #include <SDL3/SDL_video.h>
 #include <imgui.h>
 #include <imgui_impl_sdl3.h>
-#include <imgui_impl_vulkan.h>
+#include <imgui_impl_sdlrenderer3.h>
 #include <iostream>
 #include <string>
 
@@ -70,7 +70,10 @@ int main() {
 
   ImGui::StyleColorsDark();
 
-  ImGui_ImplSDL3_InitForVulkan(sdl_window);
+  // ImGui_ImplSDL3_InitForVulkan(sdl_window);
+  ImGui_ImplSDL3_InitForSDLRenderer(sdl_window, sdl_renderer);
+  ImGui_ImplSDLRenderer3_Init(sdl_renderer);
+  
 
   while (running) {
     SDL_Event sdl_event;
@@ -90,19 +93,23 @@ int main() {
     // make gui
     // ImGui_ImplSDL3_NewFrame();
     // ImGui_ImplVulkan_NewFrame();
+    ImGui_ImplSDLRenderer3_NewFrame();
     ImGui_ImplSDL3_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("MyWindow");
-    ImGui::Checkbox("Boolean property", nullptr);
-    ImGui::End();
-
+    {
+      ImGui::Begin("MyWindow");
+      // ImGui::Checkbox("Boolean property", nullptr);
+      ImGui::Text("Hawk tuah!");
+      ImGui::End();
+    }
     SDL_BlitSurface(wires, nullptr, sdl_windowSurface, nullptr);
     ImGui::Render();
     SDL_UpdateWindowSurface(sdl_window);
     SDL_Delay(10);
   };
 
+  ImGui_ImplSDLRenderer3_Shutdown();
   ImGui_ImplSDL3_Shutdown();
   ImGui::DestroyContext();
 
