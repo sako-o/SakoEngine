@@ -1,1 +1,1 @@
-((nil . (compile-command . "ninja -C ./build")))
+((nil . ((compile-command . "ninja -C ./build"))))
