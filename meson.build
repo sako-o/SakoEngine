@@ -12,7 +12,8 @@ inc = [include_directories('src/include')]
 
 
 sakoengine_deps = [
-  dependency('sdl3')
+  dependency('sdl3'),
+  dependency('vulkan')
 ]
 
 # sakoengine_dep_libs = [
@@ -21,12 +22,13 @@ sakoengine_deps = [
 #   baz_lib,
 # ]
 
+subdir('assets')
 
 subdir('src')
 
 SakoEngine = executable('SakoEngine',
                         main_source,
                         include_directories: inc,
-                        # dependencies : sakoengine_deps,
+                        dependencies : sakoengine_deps,
                         # link_with : sakoengine_dep_libs
                        )
