@@ -32,7 +32,7 @@
             # sdl3
             #libGL
             #glew
-            #glm
+            glm
             glfw
             vulkan-headers
             vulkan-loader
