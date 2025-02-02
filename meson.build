@@ -12,7 +12,8 @@ inc = [include_directories('src/include')]
 
 
 sakoengine_deps = [
-  dependency('sdl3'),
+  # dependency('sdl3'),
+  dependency('glfw3'),
   dependency('vulkan')
 ]
 

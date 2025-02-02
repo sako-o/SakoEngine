@@ -25,6 +25,7 @@
           inherit
             (pkgs)
             meson
+            cmake # we need this apparently for some libraries...?????? what????
             ninja
             gcc
             gdb
