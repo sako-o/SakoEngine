@@ -38,6 +38,7 @@
             vulkan-headers
             vulkan-loader
             vulkan-tools
+            vulkan-validation-layers
             clang-tools
             cmake-language-server
             ;
