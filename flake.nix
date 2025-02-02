@@ -29,10 +29,11 @@
             gcc
             gdb
             pkg-config
-            sdl3
-           #libGL
-           #glew
-           #glm
+            # sdl3
+            #libGL
+            #glew
+            #glm
+            glfw
             vulkan-headers
             vulkan-loader
             vulkan-tools
