@@ -30,7 +30,7 @@
             gcc
             gdb
             pkg-config
-            # sdl3
+            #sdl3
             #libGL
             #glew
             glm
