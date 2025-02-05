@@ -2,14 +2,24 @@
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
+#include <sys/types.h>
+// #define VK_USE_PLATFORM_WIN32_KHR
+#define VK_USE_PLATFORM_WAYLAND_KHR
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
 #define GLFW_INCLUDE_VULKAN
+#define GLFW_EXPOSE_NATIVE_WAYLAND
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 #include <cstring>
 #include <map>
 #include <optional>
 #include <vector>
+#define GLFW_EXPOSE_NATIVE_WAYLAND
+#define VK_USE_PLATFORM_WAYLAND_KHR
+#include <vulkan/vulkan_wayland.h>
+#include <GLFW/glfw3native.h>
+#include <set>
 
 const int width = 800;
 const int height = 600;
@@ -38,8 +48,9 @@ VkResult CreateDebugUtilsMessengerEXT(
 
 struct QueueFamilyIndices {
   std::optional<uint32_t> graphicsFamily;
+  std::optional<uint32_t> presentFamily;
 
-  bool isComplete() { return graphicsFamily.has_value(); };
+  bool isComplete() { return graphicsFamily.has_value() && presentFamily.has_value(); };
 };
 
 class SakoEngine {
@@ -58,6 +69,18 @@ private:
   // the vulkan instance
   VkInstance instance;
 
+  // the physical vulkan device
+  VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+
+  // the vulkan device
+  VkDevice device;
+
+  // graphics queue
+  VkQueue graphicsQueue;
+
+  // present queue
+  VkQueue presentQueue;
+
   // the debug messenger for vulkan
   VkDebugUtilsMessengerEXT debugMessenger;
   static VKAPI_ATTR VkBool32 VKAPI_CALL
@@ -70,6 +93,9 @@ private:
 
     return VK_FALSE;
   }
+
+  // vulkan surface
+  VkSurfaceKHR surface;
 
   void initWindow() {
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -118,6 +144,7 @@ private:
 
     return true;
   }
+
   void createInstance() {
 
     // check if validation layers are enabled
@@ -204,11 +231,80 @@ private:
   void initVulkan() {
     createInstance();
     setupDebugMessenger();
+    createSurface();
     pickPhysicalDevice();
+    createPhysicalDevice();
   }
+  void createSurface() {
+    // VkWin32SurfaceCreateInfoKHR createInfo{};
+    // createInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+
+    // createInfo.hinstance = GetModuleHandle(nullptr);
+
+    VkWaylandSurfaceCreateInfoKHR createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
+    createInfo.surface = glfwGetWaylandWindow(window);
+
+    if (vkCreateWaylandSurfaceKHR(instance, &createInfo, nullptr, &surface) != VK_SUCCESS) {
+      throw std::runtime_error("failed to create vulkan window surface!");
+    };
+
+    if (glfwCreateWindowSurface(instance, window, nullptr, &surface) != VK_SUCCESS) {
+      throw std::runtime_error("failed to create glfw window surface!");
+    }
+    
+  };
+
+  void createPhysicalDevice() {
+    QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
+
+
+    std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
+    std::set<uint32_t> uniqueQueueFamilies = {indices.graphicsFamily.value(), indices.presentFamily.value()};
+
+    float queuePriority = 1.0f;
+    for (uint32_t queueFamily : uniqueQueueFamilies) {
+      VkDeviceQueueCreateInfo queueCreateInfo{};
+      queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+      queueCreateInfo.queueFamilyIndex = queueFamily;
+      queueCreateInfo.queueCount = 1;
+      queueCreateInfo.pQueuePriorities = &queuePriority;
+      queueCreateInfos.push_back(queueCreateInfo);
+    }
+    
+    VkPhysicalDeviceFeatures deviceFeatures{};
+
+    VkDeviceCreateInfo createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+
+    createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
+    createInfo.pQueueCreateInfos = queueCreateInfos.data();
+    
+    // createInfo.pQueueCreateInfos = &queueCreateInfo;
+    // createInfo.queueCreateInfoCount = 1;
+
+    createInfo.pEnabledFeatures = &deviceFeatures;
+
+    createInfo.enabledExtensionCount = 0;
+
+    if (enableValidationLayers) {
+      createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
+      createInfo.ppEnabledLayerNames = validationLayers.data();
+    } else {
+      createInfo.enabledLayerCount = 0;
+    }
+
+    if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device) != VK_SUCCESS) {
+      throw std::runtime_error("failed to create logical device!");
+    }
+
+    // get the device's grpahics queue
+    vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
+    // get the device's present queue
+    vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
+  };
 
   void pickPhysicalDevice() {
-    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
     uint32_t deviceCount = 0;
     vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
@@ -277,6 +373,13 @@ private:
                                              queueFamilies.data());
 
     int i = 0;
+
+    VkBool32 presentSupport = false;
+    vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+    if (presentSupport) {
+      indices.presentFamily = i;
+    }
+
     for (const auto &queueFamily : queueFamilies) {
       if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
         indices.graphicsFamily = i;
@@ -299,9 +402,11 @@ private:
     }
   }
   void cleanup() {
+    vkDestroyDevice(device, nullptr);
     if (enableValidationLayers) {
       DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
     }
+    vkDestroySurfaceKHR(instance, surface, nullptr);
     vkDestroyInstance(instance, nullptr);
     glfwDestroyWindow(window);
     glfwTerminate();

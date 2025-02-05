@@ -1,8 +1,10 @@
 * TODO Actually get the chapters from the site here
 * Vulkan Tutorial
 ** Setup
-*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Logical_device_and_queues
+*** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Logical_device_and_queues
+- State "DONE"       from "TODO"       [2025-02-05 Wed 09:42]
 ** Presentation
-*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Window_surface
+*** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Window_surface
+- State "DONE"       from "TODO"       [2025-02-05 Wed 11:27]
 *** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Swap_chain
 *** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views
