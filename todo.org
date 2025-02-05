@@ -11,7 +11,8 @@
 *** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views
 - State "DONE"       from "TODO"       [2025-02-05 Wed 12:38]
 ** Graphics Pipeline Basics
-*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
+*** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
+- State "DONE"       from "TODO"       [2025-02-05 Wed 12:46]
 *** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Shader_modules
 *** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Fixed_functions
 *** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Render_passes

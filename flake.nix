@@ -42,6 +42,7 @@
             clang-tools
             cmake-language-server
             wayland # the way land
+            shaderc # shaders whatever it was called
             ;
         };
       };

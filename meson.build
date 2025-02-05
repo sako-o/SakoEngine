@@ -26,6 +26,7 @@ subdir('assets')
 
 subdir('src')
 
+# TODO BUILD SHADERS VIA MESON!!!
 SakoEngine = executable('SakoEngine',
                         main_source,
                         include_directories: inc,

@@ -50,3 +50,6 @@ CMakeUserPresets.json
 .direnv
 
 .cache
+
+# shaders
+shaders/*.spv
