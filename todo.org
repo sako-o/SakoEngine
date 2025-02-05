@@ -10,3 +10,9 @@
 - State "DONE"       from "TODO"       [2025-02-05 Wed 12:29]
 *** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views
 - State "DONE"       from "TODO"       [2025-02-05 Wed 12:38]
+** Graphics Pipeline Basics
+*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
+*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Shader_modules
+*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Fixed_functions
+*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Render_passes
+*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Graphics_pipeline_basics/Conclusion
