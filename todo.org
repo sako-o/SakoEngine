@@ -8,4 +8,5 @@
 - State "DONE"       from "TODO"       [2025-02-05 Wed 11:27]
 *** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Swap_chain
 - State "DONE"       from "TODO"       [2025-02-05 Wed 12:29]
-*** TODO https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views
+*** DONE https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Image_views
+- State "DONE"       from "TODO"       [2025-02-05 Wed 12:38]
