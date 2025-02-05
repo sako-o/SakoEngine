@@ -41,6 +41,7 @@
             vulkan-validation-layers
             clang-tools
             cmake-language-server
+            wayland # the way land
             ;
         };
       };
